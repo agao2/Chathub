@@ -4,11 +4,9 @@ import './App.css';
 import {HubConnectionBuilder} from '@aspnet/signalr'
 
 class App extends Component {
-// test changs
-
+  
   constructor(props){
     super(props);
-
     this.state = {
       nick: 'John',
       message: ' ',
@@ -32,7 +30,7 @@ class App extends Component {
       console.log('Error making connection');
     }
 
-    this.state.hubConnection.on('ReceiveMessage' , (user, message) => {
+    this.state.hubConnection.on('receivemessage' , (user, message) => {
       console.log("recievedMEssage");
     });
   }
@@ -49,7 +47,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
