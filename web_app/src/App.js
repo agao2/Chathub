@@ -32,7 +32,7 @@ class App extends Component {
       console.log('Error making connection');
     }
 
-    this.state.hubConnection.on('sendMessage' , (user, message) => {
+    this.state.hubConnection.on('ReceiveMessage' , (user, message) => {
       console.log("recievedMEssage");
     });
   }
