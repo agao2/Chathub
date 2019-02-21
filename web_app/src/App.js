@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import {HubConnectionBuilder} from '@aspnet/signalr'
-
+import {addConnection,deleteConnection} from './actions/HubConnections'
+import {connect} from 'react-redux'
 class App extends Component {
   
   constructor(props){
@@ -16,10 +17,16 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
+
+    // need to add hubConnection to redux! 
+
     const hubConnection =  await new HubConnectionBuilder()
     .withUrl('http://localhost:5000/chathub')
     .build();
   
+    this.props.addConnection(hubConnection)
+
+    
     this.setState({hubConnection : hubConnection});
 
     try {
@@ -33,10 +40,12 @@ class App extends Component {
     this.state.hubConnection.on('receivemessage' , (user, message) => {
       console.log("recievedMEssage");
     });
+    
   }
 
   sendMessage = () => {
     console.log("sendMessage");
+    console.log(this.props)
     this.state.hubConnection
       .invoke('sendMessage' , this.state.nick, 'Hello World');
   }
@@ -67,4 +76,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addConnection: hubConnection => dispatch(addConnection(hubConnection)),
+    deleteConnection: hubConnection => dispatch(deleteConnection(hubConnection))
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    HubConnections: state.HubConnections
+  }
+}
+
+
+
+export default connect( mapStateToProps,mapDispatchToProps)(App);

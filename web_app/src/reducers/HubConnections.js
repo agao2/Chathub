@@ -2,7 +2,8 @@
 const HubConnections = (state = [], action) => {
     switch (action.type) {
         case 'ADD CONNECTION':
-            return state.push(action.connection);
+            state.push(action.connection);
+            return state
 
         case 'DELETE CONNECTION':
             let newState = state;
