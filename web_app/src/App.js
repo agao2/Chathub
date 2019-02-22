@@ -4,6 +4,7 @@ import './App.css';
 import {HubConnectionBuilder} from '@aspnet/signalr'
 import {addConnection,deleteConnection} from './actions/HubConnections'
 import {connect} from 'react-redux'
+import Chatroom from './components/Chatroom/Chatroom'
 class App extends Component {
   
   constructor(props){
@@ -56,18 +57,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <Chatroom></Chatroom>
           <br/>
           <button onClick={this.sendMessage}> SEND </button>
         </header>
