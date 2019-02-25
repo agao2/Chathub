@@ -4,7 +4,7 @@ import './App.css';
 import {HubConnectionBuilder} from '@aspnet/signalr'
 import {addConnection,deleteConnection} from './actions/HubConnections'
 import {connect} from 'react-redux'
-import Chatroom from './components/Chatroom/Chatroom'
+import Chatroom from './components/Chatroom'
 class App extends Component {
   
   constructor(props){
@@ -45,10 +45,10 @@ class App extends Component {
   }
 
   sendMessage = () => {
-    console.log("sendMessage");
-    console.log(this.props)
-    this.state.hubConnection
-      .invoke('sendMessage' , this.state.nick, 'Hello World');
+    // console.log("sendMessage");
+    // console.log(this.props)
+    // this.state.hubConnection
+    //   .invoke('sendMessage' , this.state.nick, 'Hello World');
   }
 
 
@@ -56,11 +56,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
           <Chatroom></Chatroom>
-          <br/>
-          <button onClick={this.sendMessage}> SEND </button>
-        </header>
       </div>
     );
   }
