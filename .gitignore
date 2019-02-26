@@ -9,3 +9,5 @@ core_server/obj/core_server.csproj.nuget.cache
 core_server/obj/Debug/netcoreapp2.1/project.razor.json
 core_server/obj/Debug/netcoreapp2.1/core_server.assets.cache
 core_server/obj/core_server.csproj.nuget.g.props
+*.cache
+*.props
