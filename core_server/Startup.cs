@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SignalRChat.Hubs;
+using Microsoft.EntityFrameworkCore;
+using core_server.Models;
 
 namespace core_server
 {
@@ -37,6 +39,8 @@ namespace core_server
                     .WithOrigins("http://localhost:3000");
             }));
             services.AddSignalR();
+
+            services.AddDbContext<UserContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
