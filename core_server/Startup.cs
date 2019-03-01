@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SignalRChat.Hubs;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Swagger;
 using core_server.Models;
 
 namespace core_server
@@ -39,7 +40,9 @@ namespace core_server
                     .WithOrigins("http://localhost:3000");
             }));
             services.AddSignalR();
-
+            services.AddSwaggerGen( c => {
+                c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
+            });
             services.AddDbContext<UserContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
@@ -66,6 +69,10 @@ namespace core_server
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chatHub");
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "core api");
             });
         }
     }
