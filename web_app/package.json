@@ -5,6 +5,7 @@
   "dependencies": {
     "@aspnet/signalr": "^1.1.0",
     "react": "^16.8.0",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.0",
     "react-redux": "^6.0.1",
     "react-scripts": "2.1.3",
