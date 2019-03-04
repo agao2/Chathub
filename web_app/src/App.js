@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Chatroom from './components/Chatroom'
-import Navbar from './components/Navbar'
+import Navibar from './components/Navibar'
 class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <Navbar></Navbar>
+        <Navibar></Navibar>
         <Chatroom></Chatroom>
       </div>
     );
