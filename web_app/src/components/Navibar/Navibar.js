@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
-
+import './Navibar.css'
 
 class Navibar extends Component {
-
     render() {
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -17,6 +16,7 @@ class Navibar extends Component {
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
+               <Button> Login </Button>
             </Navbar>
         );
     }

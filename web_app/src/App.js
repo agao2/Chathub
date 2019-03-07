@@ -4,6 +4,8 @@ import './App.css';
 
 import Chatroom from './components/Chatroom'
 import Navibar from './components/Navibar'
+import Login from './components/Login'
+
 class App extends Component {
 
   render() {
@@ -11,6 +13,8 @@ class App extends Component {
       <div className="App">
         <Navibar></Navibar>
         <Chatroom></Chatroom>
+
+        {/* <Login></Login> */}
       </div>
     );
   }
