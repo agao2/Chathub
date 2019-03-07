@@ -1,3 +1,17 @@
+
+
+## TODO 
+```
+1. Add react router and separate the chatbox and login page into its own different url
+2. Have the login redirect you chat home page 
+3. Add neccessary user information to the navbar
+```
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
