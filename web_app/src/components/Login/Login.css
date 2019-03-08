@@ -28,7 +28,7 @@
   /************** 
    Input Fields
   ***************/
-  #username, #pass{
+  #username, #password{
     border: 2px solid #0097e6;
     background: none;
     display: block;
