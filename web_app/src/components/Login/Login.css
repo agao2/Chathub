@@ -44,13 +44,13 @@
   /************** 
      On Hover
   ***************/
-  #username:hover, #pass:hover{
+  #username:hover, #password:hover{
     width: 220px;
   }
   /************** 
      On Focus
   ***************/
-  #username:focus, #pass:focus{
+  #username:focus, #password:focus{
     width: 250px;
     border-color: #6fb98f;
   }
