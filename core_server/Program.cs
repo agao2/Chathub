@@ -14,7 +14,10 @@ namespace core_server
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args)
+            // .UseKestrel()
+            // .UseUrls("http://*:5000")
+            .Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

@@ -1,4 +1,5 @@
 FROM microsoft/dotnet:2.2-sdk
 WORKDIR /src
 COPY . . 
-CMD dotnet run
+ENV ASPNETCORE_URLS http://*:5000
+ENTRYPOINT ["dotnet", "run", "--server.urls", "http://*:5000"]
