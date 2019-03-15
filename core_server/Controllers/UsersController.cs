@@ -53,5 +53,17 @@ namespace core_server.Controllers
             _context.SaveChanges();
             return userDTO;
         }
+
+        //api/Users
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id){
+            User user = _context.Users.Where( u => u.ID == id).SingleOrDefault();
+
+            if(user == null)
+                return NotFound("User Not Found");
+            
+            _context.Users.Remove(user);
+                return Ok("User has been deleted");
+        }
     }
 }
