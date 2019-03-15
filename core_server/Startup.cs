@@ -43,12 +43,15 @@ namespace core_server
             services.AddSwaggerGen( c => {
                 c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
             });
+            Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
+            
             services.AddDbContext<UserContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,6 +60,10 @@ namespace core_server
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+
+            if(env.IsEnvironment("Docker")){
+                Console.WriteLine("It is in docker environment");
             }
 
             // app.UseHttpsRedirection();
