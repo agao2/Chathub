@@ -8,10 +8,11 @@ services:
       dockerfile: dev.Dockerfile
       context: ./nginx
     ports:
-      -'3000:80'
+      - '3000:80'
   api: 
-    build: dev.Dockerfile
-    context: ./core_server
+    build: 
+      dockerfile: dev.Dockerfile
+      context: ./core_server
     environment: 
       - PGUSER=postgres
       - PGHOST=postgres

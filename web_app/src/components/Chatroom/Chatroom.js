@@ -32,7 +32,7 @@ class Chatroom extends Component {
     componentDidMount = async () => {
         // need to add hubConnection to redux! 
         const hubConnection = await new HubConnectionBuilder()
-            .withUrl('http://localhost:5000/chathub')
+            .withUrl('/chathub')
             .build();
 
         this.props.addConnection(hubConnection)
