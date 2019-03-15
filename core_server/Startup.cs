@@ -32,13 +32,13 @@ namespace core_server
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
-            {
-                builder
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .WithOrigins("http://localhost:3000");
-            }));
+            // services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            // {
+            //     builder
+            //         .AllowAnyMethod()
+            //         .AllowAnyHeader()
+            //         .WithOrigins("http://localhost:3000");
+            // }));
             services.AddSignalR();
             services.AddSwaggerGen( c => {
                 c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
