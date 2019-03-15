@@ -1,4 +1,5 @@
 FROM microsoft/dotnet:2.2-sdk
 WORKDIR /src
 COPY . . 
-ENTRYPOINT ["dotnet", "run", "environment=Docker"]
+ENV ASPNETCORE_ENVIRONMENT=Docker
+ENTRYPOINT ["dotnet", "run"]

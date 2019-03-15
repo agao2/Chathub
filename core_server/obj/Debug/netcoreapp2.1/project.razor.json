@@ -2,5 +2,13 @@
   "ProjectFilePath": "c:\\Users\\ag093813\\Desktop\\Downvoot\\core_server\\core_server.csproj",
   "TargetFramework": "netcoreapp2.1",
   "TagHelpers": [],
-  "Configuration": null
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  }
 }
