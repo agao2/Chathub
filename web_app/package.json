@@ -1,11 +1,11 @@
 {
   "name": "react_chat",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@aspnet/signalr": "^1.1.0",
     "bootstrap": "^4.3.1",
+    "http-proxy-middleware": "^0.19.1",
     "react": "^16.8.0",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.0",
