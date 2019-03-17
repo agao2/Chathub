@@ -2,6 +2,13 @@ version: '3'
 services:
   postgres:
     image: 'postgres:latest'
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_USER=postgres
+    ports:
+      - '5432:5432'
   nginx:
     restart: always
     build:
@@ -22,3 +29,6 @@ services:
     build:
       dockerfile: dev.Dockerfile
       context: ./web_app
+volumes:
+  postgresql-data:
+    
