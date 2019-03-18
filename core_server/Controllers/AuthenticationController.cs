@@ -27,10 +27,10 @@ namespace core_server.Controllers
             User user = _context.Users.Where(u => u.Username == authentication.Username).SingleOrDefault();
 
             if (user == null)
-                return NotFound("User does not exist");
+                return StatusCode(403,"User does not exist");
 
             if (!user.Password.Equals(authentication.Password))
-                return Forbid("Password does not match");
+                return StatusCode(403,"Password or username does not match");
 
             return new UserDTO
             {
