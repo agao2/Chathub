@@ -51,9 +51,8 @@ namespace core_server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            Console.WriteLine("-------------");
-            Console.WriteLine(Environment.GetEnvironmentVariable("PGUSER"));
-            Console.WriteLine("-------------");
+            // String pguser = Environment.GetEnvironmentVariable("PGUSER");
+        
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

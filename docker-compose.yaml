@@ -1,21 +1,21 @@
 version: '3'
 services:
-  # postgres:
-  #   image: 'postgres:latest'
-  #   volumes:
-  #     - postgresql-data:/var/lib/postgresql/data
-  #   environment: 
-  #     - POSTGRES_PASSWORD=postgres_password
-  #     - POSTGRES_USER=postgres
-  #   ports:
-  #     - '5432:5432' # we expose this port to localhost so that you can access it with pgadmin
-  # nginx:
-  #   restart: always
-  #   build:
-  #     dockerfile: dev.Dockerfile
-  #     context: ./nginx
-  #   ports:
-  #     - '3000:80'
+  postgres:
+    image: 'postgres:latest'
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_USER=postgres
+    ports:
+      - '5432:5432' # we expose this port to localhost so that you can access it with pgadmin
+  nginx:
+    restart: always
+    build:
+      dockerfile: dev.Dockerfile
+      context: ./nginx
+    ports:
+      - '3000:80'
   api: 
     build: 
       dockerfile: dev.Dockerfile
@@ -25,10 +25,10 @@ services:
       - PGHOST=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
-#   client:
-#     build:
-#       dockerfile: dev.Dockerfile
-#       context: ./web_app
-# volumes:
-#   postgresql-data:
+  client:
+    build:
+      dockerfile: dev.Dockerfile
+      context: ./web_app
+volumes:
+  postgresql-data:
     
