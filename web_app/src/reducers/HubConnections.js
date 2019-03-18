@@ -1,11 +1,13 @@
 
+import {actions} from '../actions/HubConnections'
+
 const HubConnections = (state = [], action) => {
     switch (action.type) {
-        case 'ADD CONNECTION':
+        case actions.ADD_CONNECTION:
             state.push(action.connection);
             return state
 
-        case 'DELETE CONNECTION':
+        case actions.DELETE_CONNECTION:
             let newState = state;
             let index = newState.indexOf(action.connection)
             if (index > -1) {

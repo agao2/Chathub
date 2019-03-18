@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import './Login.css'
+import {authenticate} from  '../../actions/Users'
 
 class Login extends Component {
 
@@ -11,14 +13,16 @@ class Login extends Component {
     }
   }
 
-  onChange = (event) => {    
+  onChange = (event) => {
     let state = this.state;
     state[event.target.id] = event.target.value;
   }
 
   onSubmit = () => {
-    console.log(this.state.username);
-    console.log(this.state.password);
+    this.props.authenticate({
+      username:this.state.username, 
+      password:this.state.password
+    })
   }
 
   render() {
@@ -31,8 +35,18 @@ class Login extends Component {
       </div>
     );
   }
-
-
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authenticate: (user) => dispatch(authenticate(user))
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+      Users: state.Users
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
