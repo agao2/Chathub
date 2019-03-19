@@ -10,8 +10,12 @@ import rootReducer from './reducers'
 import thunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
 import logger from 'redux-logger'
+
+const initialState = JSON.parse(localStorage.reduxStore);
+
 const store = createStore(
     rootReducer,
+    initialState,
     compose(
         applyMiddleware(thunk),
         applyMiddleware(logger)
