@@ -9,20 +9,14 @@ export const actions = {
     LOGIN_FAILED: "LOGIN FAILED"
 };
 
-// export const login = user = ({
-//     type: actions.LOGIN,
-//     user: user
-// })
 
-export const authenticate = async(user) => {
-    return async(dispatch) => {
+export const authenticate = (user) => {
+    return async (dispatch) => {
         try {
-            let res = await axios.post('/api/Authentication',user);
-            console.log(res);
-            dispatch({type:actions.LOGIN , res})
-            
-        } catch (err) {
-           dispatch({type: actions.LOGIN_FAILED})
+            const res = await axios.post('/api/Authentication', user);
+            return dispatch({ type: actions.LOGIN_FAILED, user:res})
+        } catch (err){
+            return dispatch({ type: actions.LOGIN_FAILED, user:"failed login"})
         }
     }
 }
