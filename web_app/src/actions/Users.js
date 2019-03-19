@@ -14,9 +14,9 @@ export const authenticate = (user) => {
     return async (dispatch) => {
         try {
             const res = await axios.post('/api/Authentication', user);
-            return dispatch({ type: actions.LOGIN_FAILED, user:res})
+            return dispatch({ type: actions.LOGIN, user:res})
         } catch (err){
-            return dispatch({ type: actions.LOGIN_FAILED, user:"failed login"})
+            return dispatch({ type: actions.LOGIN_FAILED, user:{}})
         }
     }
 }
