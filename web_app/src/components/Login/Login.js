@@ -13,6 +13,12 @@ class Login extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.Users != null) {
+      console.log(this.props)
+    }
+  }
+
   onChange = (event) => {
     let state = this.state;
     state[event.target.id] = event.target.value;
