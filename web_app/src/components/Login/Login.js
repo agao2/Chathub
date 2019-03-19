@@ -7,15 +7,16 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props)
     this.state = {
       username: "",
       password: ""
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.Users != null) {
-      console.log(this.props)
+  componentWillMount() {
+    if(this.props.Users != null) {
+      this.props.history.push("/");
     }
   }
 
@@ -43,16 +44,16 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    authenticate: (user) => dispatch(authenticate(user))
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     authenticate: (user) => dispatch(authenticate(user))
+//   }
+// }
 
-function mapStateToProps(state) {
-  return {
-      Users: state.Users
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//       Users: state.Users
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

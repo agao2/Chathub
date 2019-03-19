@@ -1,11 +1,12 @@
 import { actions } from '../actions/Users'
 
 const Users = (state = {}, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case actions.LOGIN:
-            state = action.user.data
-            return state;
+            return Object.assign({}, state, action.user.data)
         case actions.LOGIN_FAILED:
+            return null;
+        case actions.GET_USER:
             return state;
         default:
             return state;
