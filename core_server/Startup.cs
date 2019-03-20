@@ -64,11 +64,11 @@ namespace core_server
             }
 
             // app.UseHttpsRedirection();
-            app.UseCors(builder => builder
-                        .WithOrigins("http://localhost:3000")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
+            // app.UseCors(builder => builder
+            //             .WithOrigins("http://localhost:3000")
+            //             .AllowAnyMethod()
+            //             .AllowAnyHeader()
+            //             .AllowCredentials());
             app.UseMvc();
             app.UseSignalR(routes =>
             {

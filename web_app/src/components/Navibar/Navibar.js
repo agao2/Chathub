@@ -8,7 +8,6 @@ import './Navibar.css'
 class Navibar extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
     }
 
     onLogin = () => {
@@ -17,7 +16,6 @@ class Navibar extends Component {
 
     render() {
         const isLoggedIn = this.props.User ? true : false;
-        console.log(this.props)
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand >Chathub</Navbar.Brand>
