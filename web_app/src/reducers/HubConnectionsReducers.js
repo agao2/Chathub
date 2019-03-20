@@ -1,5 +1,5 @@
 
-import {actions} from '../actions/HubConnections'
+import {actions} from '../actions/HubConnectionsActions'
 
 const HubConnections = (state = [], action) => {
     switch (action.type) {

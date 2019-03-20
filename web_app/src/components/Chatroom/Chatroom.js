@@ -3,7 +3,7 @@ import Messages from '../Messages'
 import Input from '../Input'
 import './Chatroom.css'
 import { HubConnectionBuilder } from '@aspnet/signalr'
-import { addConnection, deleteConnection } from '../../actions/HubConnections'
+import { addConnection, deleteConnection } from '../../actions/HubConnectionsActions'
 import { connect } from 'react-redux'
 
 class Chatroom extends Component {
