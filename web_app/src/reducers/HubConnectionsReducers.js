@@ -1,19 +1,13 @@
 
 import {actions} from '../actions/HubConnectionsActions'
 
-const HubConnections = (state = [], action) => {
+const HubConnections = (state = {}, action) => {
     switch (action.type) {
         case actions.ADD_CONNECTION:
-            state.push(action.connection);
-            return state
-
+            return Object.assign({}, state, action.connection)
+        
         case actions.DELETE_CONNECTION:
-            let newState = state;
-            let index = newState.indexOf(action.connection)
-            if (index > -1) {
-                newState.splice(index, 1)
-            }
-            return newState;
+            return {}
 
         default:
             return state;

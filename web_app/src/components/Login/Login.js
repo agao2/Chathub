@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import './Login.css'
-import {authenticate} from  '../../actions/UsersActions'
+
 
 class Login extends Component {
 
@@ -13,10 +12,8 @@ class Login extends Component {
     }
   }
 
-  componentWillMount() {
-    if(this.props.Users != null) {
-      this.props.history.push("/");
-    }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
   }
 
   onChange = (event) => {
@@ -24,11 +21,14 @@ class Login extends Component {
     state[event.target.id] = event.target.value;
   }
 
-  onSubmit = () => {
-    this.props.authenticate({
+  onSubmit = async () => {
+    await this.props.authenticate({
       username:this.state.username, 
       password:this.state.password
     })
+    if(this.props.User){
+      this.props.history.push("/");
+    }
   }
 
   render() {
@@ -42,17 +42,5 @@ class Login extends Component {
     );
   }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     authenticate: (user) => dispatch(authenticate(user))
-//   }
-// }
-
-// function mapStateToProps(state) {
-//   return {
-//       Users: state.Users
-//   }
-// }
 
 export default Login;

@@ -5,10 +5,15 @@ import Navibar from '../Navibar'
 
 
 class Routes extends Component {
+
+    constructor(props){
+        super(props)
+    }
+
     render(){
         return(
             <div>
-                <Navibar></Navibar>
+                <Navibar {...this.props} ></Navibar>
                 <Chatroom></Chatroom>
             </div>
         )

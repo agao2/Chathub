@@ -1,6 +1,6 @@
 import { actions } from '../actions/UsersActions'
 
-const Users = (state = {}, action) => {
+const User = (state = {}, action) => {
     switch (action.type) {
         case actions.LOGIN:
             return Object.assign({}, state, action.user.data)
@@ -13,4 +13,4 @@ const Users = (state = {}, action) => {
     }
 }
 
-export default Users;
+export default User;
