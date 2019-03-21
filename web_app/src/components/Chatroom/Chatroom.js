@@ -50,6 +50,7 @@ class Chatroom extends Component {
         }
 
         this.state.hubConnection.on('receivemessage', (user, message) => {
+            console.log(user);
             const messages = this.state.messages
             messages.push({
                 text: message,
