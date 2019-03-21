@@ -14,7 +14,7 @@ class Routes extends Component {
         return(
             <div>
                 <Navibar {...this.props} ></Navibar>
-                <Chatroom></Chatroom>
+                <Chatroom {...this.props} ></Chatroom>
             </div>
         )
     }

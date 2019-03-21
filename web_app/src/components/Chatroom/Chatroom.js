@@ -30,7 +30,6 @@ class Chatroom extends Component {
     }
 
     componentDidMount = async () => {
-        // need to add hubConnection to redux! 
         const hubConnection = await new HubConnectionBuilder()
             .withUrl('/chathub')
             // .withUrl('http://localhost:5000/chathub')
@@ -50,20 +49,22 @@ class Chatroom extends Component {
         }
 
         this.state.hubConnection.on('receivemessage', (user, message) => {
-            console.log(user);
             const messages = this.state.messages
+            let member = {
+                id: 2,
+                username: user,
+                color: "Yellow"
+            }
             messages.push({
                 text: message,
-                member: this.state.member
+                member: member
             })
             this.setState({ messages: messages })
         });
     }
 
     onSendMessage = (message) => {
-        console.log("sendMessage");
-        console.log(this.state.hubConnection)
-        this.state.hubConnection.invoke('sendMessage', this.state.nick, message);
+        this.state.hubConnection.invoke('sendMessage', this.props.User.username, message);
     }
 
     render() {
