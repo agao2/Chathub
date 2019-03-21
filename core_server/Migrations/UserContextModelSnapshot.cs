@@ -43,7 +43,9 @@ namespace core_server.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { ID = 1, DateCreated = "3/17/2019", EmailAddress = "alex@fake.com", Password = "password", PasswordSalt = "password_salt", Username = "alex" }
+                        new { ID = 1, DateCreated = "3/17/2019", EmailAddress = "alex@fake.com", Password = "password", PasswordSalt = "password_salt", Username = "alex" },
+                        new { ID = 2, DateCreated = "3/17/2019", EmailAddress = "rob@ss.com", Password = "password", PasswordSalt = "password_salt", Username = "rob" },
+                        new { ID = 3, DateCreated = "3/17/2019", EmailAddress = "ll@fake.com", Password = "password", PasswordSalt = "password_salt", Username = "lisa" }
                     );
                 });
 #pragma warning restore 612, 618

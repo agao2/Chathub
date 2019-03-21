@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
-import Nav from 'react-bootstrap/Nav'
+// import Nav from 'react-bootstrap/Nav'
 import './Navibar.css'
 
 
 class Navibar extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     onLogin = () => {
         this.props.history.push("/login");
@@ -19,18 +19,18 @@ class Navibar extends Component {
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand >Chathub</Navbar.Brand>
-                {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
+                    {/* <Nav className="mr-auto">
                         <Nav.Link href="#features">Features</Nav.Link>
-                    </Nav>
+                    </Nav> */}
                 </Navbar.Collapse>
                 {isLoggedIn
                     ? <Navbar.Text>
-                        Signed in as: <a>{this.props.User.username}</a>
+                        Signed in as: <a href="\">{this.props.User.username}</a>
                     </Navbar.Text>
                     : <Button onClick={this.onLogin}> Login </Button>
                 }
+                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             </Navbar>
         );
     }
