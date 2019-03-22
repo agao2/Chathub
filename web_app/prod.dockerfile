@@ -1,11 +1,10 @@
-FROM node:8 as react-build
+FROM node:8 as build
 WORKDIR /app
 COPY . ./
 RUN npm install
-RUN npm build
+RUN npm run build
 
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=react-build /app/build /usr/share/nginx/html
-EXPOSE 3000
+COPY --from=build /app/build /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
