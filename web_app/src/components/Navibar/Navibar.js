@@ -15,7 +15,7 @@ class Navibar extends Component {
     }
 
     render() {
-        const isLoggedIn = this.props.User.username ? true : false;
+        const isLoggedIn = this.props.User ? this.props.User.username : null
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand >Chathub</Navbar.Brand>

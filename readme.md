@@ -5,7 +5,8 @@ The application is built using react, .net core, and postgres. To start the appl
 1. In the core_server directory, execute `dotnet run` in a terminal. You may need to install all the despendencies, do this with the `dotnet restore` command.   
 To set the environment, use the environment variable `ASPNETCORE_ENVIRONMENT`.   
 `set ASPNETCORE_ENVIRONMENT=Development`   
-`echo %ASPNETCORE_ENVIRONMENT%`  
+`echo %ASPNETCORE_ENVIRONMENT%`    
+Note that the environment defaults to production if no environment is set. 
 Swagger if available for this api, go to `localhost:5000/swagger` to see the ui. 
 
 2. In the web_app directory, use the `npm start` command. Again you may need to install all the node modules, to do that do `npm install` in the same directory.   
@@ -23,6 +24,6 @@ In the same directory of the docker-compose.yaml file, do
 2. `docker-compose up`    
 3. Watch the magic happen , access the application on `localhost:3000`
 
-## How to run in minikube
+## How to start in minikube
 - Comming soon
 
