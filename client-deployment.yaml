@@ -2,7 +2,8 @@ apiVerison: apps/v1
 kind: Deployment
 metadata:
   name: client
-spec:
+spec: 
+  replicas: 1
   selector:
     matchLabels:
       component: client
@@ -13,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: <Image>
+        image: agao2/web_app:1
         resources:
           limits:
             memory: "128Mi"
