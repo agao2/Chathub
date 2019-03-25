@@ -1,23 +1,23 @@
-kind:apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: server-deployment
-spec:
-  replicas: 1 
+  name: client-deployment
+spec: 
+  replicas: 1
   selector:
     matchLabels:
-      component: server
+      component: client
   template:
     metadata:
       labels:
-        component: server
+        component: client
     spec:
       containers:
-      - name: server
-        image: agao2/core_server:1
+      - name: client
+        image: agao2/web_app:1
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 5000
+        - containerPort: 3000
