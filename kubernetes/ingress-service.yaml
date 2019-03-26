@@ -4,7 +4,10 @@ metadata:
   name: ingress-service
   annotations: 
     kubenernetes.io/ingress.class: nginx  
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+    nginx.ingress.kubernetes.io/session-cookie-name: REALTIMESERVERID
     nginx.org/websocket-services: "server-cluster-ip-service"
 spec:
   rules:
@@ -14,11 +17,11 @@ spec:
             backend:
               serviceName: client-cluster-ip-service
               servicePort: 3000
-          - path: /api/
+          - path: /api
             backend: 
               serviceName: server-cluster-ip-service
               servicePort: 5000
-          - path: /chathub/
+          - path: /chathub
             backend: 
               serviceName: server-cluster-ip-service
               servicePort: 5000
