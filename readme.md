@@ -24,6 +24,10 @@ In the same directory of the docker-compose.yaml file, do
 2. `docker-compose up`    
 3. Watch the magic happen , access the application on `localhost:3000`
 
-## How to start in minikube
+## How to start in kubernetes
 - Comming soon
+
+
+## Starting jenkins 
+docker run --rm -p 8080:8080 -v jenkins_home:/var/jenkins/home -v /var/run/docker.sock:var/run/docker.sock -v c:\users\ag093813:/home jenkinsci/blueocean
 
