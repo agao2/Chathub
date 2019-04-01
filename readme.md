@@ -29,5 +29,6 @@ In the same directory of the docker-compose.yaml file, do
 
 
 ## Starting jenkins 
-docker run --rm -p 8080:8080 -v jenkins_home:/var/jenkins/home -v /var/run/docker.sock:var/run/docker.sock -v c:\users\ag093813:/home jenkinsci/blueocean
+docker run --rm -p 8080:8080 -v jenkins_home:/var/jenkins/home -v //var/run/docker.sock:/var/run/docker.sock -v c:\users\ag093813:/home jenkinsci/blueocean
 
+on windows you might need set COMPOSE_CONVERT_WINDOWS_PATHS=1
