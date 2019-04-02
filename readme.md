@@ -31,4 +31,9 @@ In the same directory of the docker-compose.yaml file, do
 ## Starting jenkins 
 docker run --rm -p 8080:8080 -v jenkins_home:/var/jenkins/home -v //var/run/docker.sock:/var/run/docker.sock -v c:\users\ag093813:/home jenkinsci/blueocean
 
-on windows you might need set COMPOSE_CONVERT_WINDOWS_PATHS=1
+note that here we are mounting the unix socket docker.sock into the container so that it has access to the daemon. You will run into permission problems, run 
+`chmod 777 docker.sock` to make sure that socket has the permission it needs
+
+note that if you are windows , docker.sock exists within the moby linux vm. To change the permission of the docker.sock file within the MobyLinuxVM , 
+do `docker run --privileged -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker alpine sh`
+and run `chmod 777 docker.sock` there. 
