@@ -29,6 +29,14 @@ In the same directory of the docker-compose.yaml file, do
 
 
 ## Starting jenkins 
+
+
+
+Undergoing changes!
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
 docker run --rm -p 8080:8080 -v jenkins_home:/var/jenkins/home -v //var/run/docker.sock:/var/run/docker.sock -v c:\users\ag093813:/home jenkinsci/blueocean
 
 note that here we are mounting the unix socket docker.sock into the container so that it has access to the daemon. You will run into permission problems, run 
