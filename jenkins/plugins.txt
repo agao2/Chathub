@@ -18,7 +18,6 @@ blueocean-pipeline-scm-api
 blueocean-rest
 blueocean-rest-impl
 blueocean-web
-bouncycastle-api
 branch-api
 build-timeout
 cloudbees-folder
@@ -106,4 +105,12 @@ variant
 workflow-aggregator
 workflow-api
 workflow-basic-steps
-wor
+workflow-cps
+workflow-cps-global-lib
+workflow-durable-task-step
+workflow-job
+workflow-multibranch
+workflow-scm-step
+workflow-step-api
+workflow-support
+ws-cleanup
