@@ -9,7 +9,7 @@
  */
 
 def coreServerTag = "agao2/core_server:${env.tag}"
-def coreServerTag = "agao2/web_app:${env.tag}"
+def webAppTag = "agao2/web_app:${env.tag}"
 
 pipeline {
     agent { node { label 'master' } }  // just use master node i guess
