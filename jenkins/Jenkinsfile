@@ -15,15 +15,20 @@ pipeline {
     agent { node { label 'master' } }  // just use master node i guess
 
     stages {
-
-        stage('Checkout') {
-            steps{
-                echo "grabbing code from repository"
-                git branch: "master", url: 'https://git.jfrog.info/scm/~eldada/acme-ci-cd.git'
-                
-                // Validate kubectl
-                sh "kubectl cluster-info"
+            stage('Build') {
+                steps {
+                    echo 'Building..'
+                }
+            }
+            stage('Test') {
+                steps {
+                    echo 'Testing..'
+                }
+            }
+            stage('Deploy') {
+                steps {
+                    echo 'Deploying....'
+                }
             }
         }
-    }
 }
