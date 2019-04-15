@@ -25,23 +25,21 @@ In the same directory of the docker-compose.yaml file, do
 3. Watch the magic happen , access the application on `localhost:3000`
 
 ## How to start in kubernetes
-- Comming soon
+1. Setup ingress nginx, follow the steps at https://kubernetes.github.io/ingress-nginx/deploy/
+2. Navigate to the kubernetes directory and do `kubectl apply -f ./`
+
+This creates a set of kubernetes objects in our cluster including pods, clusterip, ingress, persistent volume claim, and probably more in the future. 
 
 
 ## Starting jenkins 
+1. `docker build -t jenkins -f jenkins/Dockerfile`
+2. `docker run --name -p 8080:8080 jenkins jenkins`
+
+The first instruction contructs a image with jenkins and all the necessary tools and plugins added to it at image build time. 
+The second instructions runs a container from that image and maps port 8080, the default port for jenkins
+
+Please note that the plugins are listed in a plugins.txt folder. When editing this file on windows, make sure the line endings are converted back for linux as this could cause errors. 
+If you see a lot of illegal characters and 404s and building the  jenkins image, try using `dos2unix plugins.txt` . 
 
 
 
-Undergoing changes!
-
-
-
----------------------------------------------------------------------------------------------------------------------------------------------------
-docker run --rm -p 8080:8080 -v jenkins_home:/var/jenkins/home -v //var/run/docker.sock:/var/run/docker.sock -v c:\users\ag093813:/home jenkinsci/blueocean
-
-note that here we are mounting the unix socket docker.sock into the container so that it has access to the daemon. You will run into permission problems, run 
-`chmod 777 docker.sock` to make sure that socket has the permission it needs
-
-note that if you are windows , docker.sock exists within the moby linux vm. To change the permission of the docker.sock file within the MobyLinuxVM , 
-do `docker run --privileged -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker alpine sh`
-and run `chmod 777 docker.sock` there. 
