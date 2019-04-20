@@ -25,6 +25,7 @@ spec:
             cpu: "100m"
         ports:
         - containerPort: 5432
+        # Note that volume mounts from windows to linux causes a lot of issues. When running in docker-deskop kubernetes, this mount may cause problems
         volumeMounts: 
           - name: postgres-storage
             mountPath: /var/lib/postgresql/data
