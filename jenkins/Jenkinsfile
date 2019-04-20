@@ -14,21 +14,14 @@ def webAppTag = "agao2/web_app:${env.tag}"
 pipeline {
     agent { node { label 'master' } }  // just use master node i guess
 
-    stages {
-            stage('Build') {
-                steps {
-                    echo 'Building..'
-                }
-            }
-            stage('Test') {
-                steps {
-                    echo 'Testing..'
-                }
-            }
-            stage('Deploy') {
-                steps {
-                    echo 'Deploying....'
-                }
+ stages {
+        stage('Git clone and setup') {
+            steps {
+                echo "grabbing code from repository"
+                git branch: "master", url: 'https://github.com/agao2/Downvoot.git'
+                sh "kubectl cluster-info"
             }
         }
+    }
 }
+
