@@ -62,8 +62,7 @@ namespace core_server
 
             // app.UseHttpsRedirection();
             app.UseMvc();
-            app.UseSignalR(routes =>
-            {
+            app.UseSignalR(routes => {
                 routes.MapHub<ChatHub>("/chatHub");
             });
             app.UseSwagger();
