@@ -6,11 +6,12 @@ The application is built using react, .net core, and postgres. To start the appl
 Swagger if available for this api, go to `localhost:5000/swagger` to see the ui. 
 
 The following environment variables are used to connect a postgres database.
-    - PGHOST (defaults to localhost)
-    - PGPORT (defaults to 5432)
-    - PGUSER (defaults to postgres)
-    - PGPASSWORD (defaults to password)
-    - PGDATABASE (defaults to chathub)
+
+    PGHOST (defaults to localhost)
+    PGPORT (defaults to 5432)
+    PGUSER (defaults to postgres)
+    PGPASSWORD (defaults to password)
+    PGDATABASE (defaults to chathub)
 
 
 2. In the web_app directory, use the `npm start` command. Again you may need to install all the node modules, to do that do `npm install` in the same directory.   
