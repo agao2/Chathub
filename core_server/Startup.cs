@@ -36,6 +36,7 @@ namespace core_server
                 c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
             });
 
+            // Configurations for postgres database
             String PGHOST = Environment.GetEnvironmentVariable("PGHOST") ?? "localhost";
             String PGPORT = Environment.GetEnvironmentVariable("PGPORT") ?? "5432";
             String PGUSER = Environment.GetEnvironmentVariable("PGUSER") ?? "postgres";

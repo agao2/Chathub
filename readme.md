@@ -3,19 +3,23 @@
 The application is built using react, .net core, and postgres. To start the application locally for development you will need start each of these 3 core parts. 
 
 1. In the core_server directory, execute `dotnet run` in a terminal. You may need to install all the despendencies, do this with the `dotnet restore` command.   
-To set the environment, use the environment variable `ASPNETCORE_ENVIRONMENT`.   
-`set ASPNETCORE_ENVIRONMENT=Development`   
-`echo %ASPNETCORE_ENVIRONMENT%`    
-Note that the environment defaults to production if no environment is set. 
 Swagger if available for this api, go to `localhost:5000/swagger` to see the ui. 
+
+The following environment variables are used to connect a postgres database.
+1. PGHOST (defaults to localhost)
+2. PGPORT (defaults to 5432)
+3. PGUSER (defaults to postgres)
+4. PGPASSWORD (defaults to password)
+5. PGDATABASE (defaults to chathub)
+
 
 2. In the web_app directory, use the `npm start` command. Again you may need to install all the node modules, to do that do `npm install` in the same directory.   
 The web app is then accessible at localhost:3000
-3. You can download postgres for your os and run that server locally. If you do that look into the appsettings.json files and update the connection string for default connection accordingly. 
+3. You can download postgres for your os and run that server locally. 
 You can also run utilizing docker with the command:   
  `docker run -p 5432:5432 -v ./data:/var/lib/postgresql/data postgres `
 
- To run the migrations for the database, use `dotnet ef database update --environment <environment>`
+ To run the migrations for the database, use `dotnet ef database update`
 
 
 ## How to start in docker
