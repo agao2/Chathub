@@ -31,28 +31,25 @@ namespace core_server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            // services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
-            // {
-            //     builder
-            //         .AllowAnyMethod()
-            //         .AllowAnyHeader()
-            //         .WithOrigins("http://localhost:3000");
-            // }));
             services.AddSignalR();
             services.AddSwaggerGen( c => {
                 c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
             });
-            // Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
-            
-            services.AddDbContext<UserContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            String PGHOST = Environment.GetEnvironmentVariable("PGHOST") ?? "localhost";
+            String PGPORT = Environment.GetEnvironmentVariable("PGPORT") ?? "5432";
+            String PGUSER = Environment.GetEnvironmentVariable("PGUSER") ?? "postgres";
+            String PGPASSWORD = Environment.GetEnvironmentVariable("PGPASSWORD") ?? "password";
+            String PGDATABASE = Environment.GetEnvironmentVariable("PGDATABASE") ?? "chathub";
+
+            String DefaultConnection = $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}";
+
+            services.AddDbContext<UserContext>(options => options.UseNpgsql(DefaultConnection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // String pguser = Environment.GetEnvironmentVariable("PGUSER");
-        
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,11 +61,6 @@ namespace core_server
             }
 
             // app.UseHttpsRedirection();
-            // app.UseCors(builder => builder
-            //             .WithOrigins("http://localhost:3000")
-            //             .AllowAnyMethod()
-            //             .AllowAnyHeader()
-            //             .AllowCredentials());
             app.UseMvc();
             app.UseSignalR(routes =>
             {
