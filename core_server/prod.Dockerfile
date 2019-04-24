@@ -11,7 +11,6 @@ RUN dotnet publish core_server.csproj -c Release -o /app
 FROM base AS final 
 WORKDIR /app
 COPY --from=publish /app .
-ENV ASPNETCORE_ENVIRONMENT=Docker
 ENTRYPOINT ["dotnet", "core_server.dll"]
 
 # app listens on port 5000, might want to map that port to access it. 
