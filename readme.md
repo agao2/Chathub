@@ -33,11 +33,19 @@ In the same directory of the docker-compose.yaml file, do
 2. `docker-compose up`    
 3. Watch the magic happen , access the application on `localhost:3000`
 
+Below is the architecture of how the application looks when running in docker
+
+<img src='./readme_assets/DockerCompose-Architecture.png'></img>
+
+
 ## How to start in kubernetes
 1. Setup ingress nginx, follow the steps at https://kubernetes.github.io/ingress-nginx/deploy/
 2. Navigate to the kubernetes directory and do `kubectl apply -f ./`
 
 This creates a set of kubernetes objects in our cluster including pods, clusterip, ingress, persistent volume claim, and probably more in the future. 
+
+Currently looking into putting jenkins into a pod and configuring a pipeline
+through a jenkinsfile
 
 
 ## Starting jenkins 
