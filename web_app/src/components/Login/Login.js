@@ -12,23 +12,19 @@ class Login extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
-  }
-
   onChange = (event) => {
     let state = this.state;
     state[event.target.id] = event.target.value;
   }
 
-  onSubmit = async () => {
-    await this.props.authenticate({
-      username:this.state.username, 
-      password:this.state.password
-    })
-    if(this.props.User){
-      this.props.history.push("/");
-    }
+  onSubmit =  () => {
+    // await this.props.authenticate({
+    //   username:this.state.username, 
+    //   password:this.state.password
+    // })
+    // if(this.props.User){
+    //   this.props.history.push("/");
+    // }
   }
 
   render() {
