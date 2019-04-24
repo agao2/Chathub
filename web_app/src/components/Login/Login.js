@@ -17,7 +17,8 @@ class Login extends Component {
     state[event.target.id] = event.target.value;
   }
 
-  onSubmit =  () => {
+  onSubmit = () => {
+    console.log("ON SUBMIT CALLED")
     // await this.props.authenticate({
     //   username:this.state.username, 
     //   password:this.state.password
