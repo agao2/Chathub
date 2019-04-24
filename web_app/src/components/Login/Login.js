@@ -17,15 +17,14 @@ class Login extends Component {
     state[event.target.id] = event.target.value;
   }
 
-  onSubmit = () => {
-    console.log("ON SUBMIT CALLED")
-    // await this.props.authenticate({
-    //   username:this.state.username, 
-    //   password:this.state.password
-    // })
-    // if(this.props.User){
-    //   this.props.history.push("/");
-    // }
+  onSubmit = async () => {
+    await this.props.authenticate({
+      username:this.state.username, 
+      password:this.state.password
+    })
+    if(this.props.User){
+      this.props.history.push("/");
+    }
   }
 
   render() {
