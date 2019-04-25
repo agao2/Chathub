@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using core_server.Models;
-
+using StackExchange.Redis;
 
 namespace core_server.Controllers
 {
@@ -16,9 +16,11 @@ namespace core_server.Controllers
     {
 
         private readonly UserContext _context;
-        public AuthenticationController(UserContext context)
+        private IConnectionMultiplexer _connectionMultiplexer;
+        public AuthenticationController(UserContext context,IConnectionMultiplexer multiplexer)
         {
             _context = context;
+            this._connectionMultiplexer = multiplexer;
         }
 
         [HttpPost]
