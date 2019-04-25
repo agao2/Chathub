@@ -49,6 +49,13 @@ namespace core_server
         
             services.AddDbContext<UserContext>(options => options.UseNpgsql( $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
             services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect($"{REDIS_HOST}:{REDIS_PORT}"));
+
+            // The session store automatically uses whatever distributed cache is available, so utilizing Redis for it requires no additional configuration.
+            services.AddSession(options => {
+                options.Cookie.Name = "session-token";
+                options.Cookie.HttpOnly = true;
+                ooptions.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +80,7 @@ namespace core_server
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "core api");
             });
+            app.UseSession();
         }
     }
 }
