@@ -16,3 +16,4 @@ core_server/obj/core_server.csproj.nuget.cache
 core_server/obj/core_server.csproj.nuget.g.props
 web_app/package-lock.json
 web_app/build
+web_app/coverage/*

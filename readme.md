@@ -27,6 +27,10 @@ You can also run utilizing docker with the command:
  To run the migrations for the database, use `dotnet ef database update`
 
 
+### How to run tests:
+- `npm test` to run unit test in watch mode. Note that console outputs are configured to show in the terminal.
+- `npm test -- --coverage` to see the code coverage of the react unit tests 
+
 ## How to start in docker
 In the same directory of the docker-compose.yaml file, do
 1. `docker-compose build .` 
