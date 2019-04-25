@@ -43,14 +43,12 @@ namespace core_server
             String PGUSER = Environment.GetEnvironmentVariable("PGUSER") ?? "postgres";
             String PGPASSWORD = Environment.GetEnvironmentVariable("PGPASSWORD") ?? "password";
             String PGDATABASE = Environment.GetEnvironmentVariable("PGDATABASE") ?? "chathub";
-            String DB_CONNECTION = $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}";
             // Configurations for redis
             String REDIS_HOST = Environment.GetEnvironmentVariable("REDIS_HOST") ?? "localhost";
             String REDIS_PORT = Environment.GetEnvironmentVariable("REDIS_PORT") ?? "6379";
-            String REDIS_CONNECTION  = $"{REDIS_HOST}:{REDIS_PORT}";
-
-            services.AddDbContext<UserContext>(options => options.UseNpgsql(DB_CONNECTION));
-            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(REDIS_CONNECTION));
+        
+            services.AddDbContext<UserContext>(options => options.UseNpgsql( $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect($"{REDIS_HOST}:{REDIS_PORT}"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

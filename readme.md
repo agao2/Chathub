@@ -15,6 +15,8 @@ Swagger if available for this api, go to `localhost:5000/swagger` to see the ui.
     |PGUSER    | postgres |
     |PGPASSWORD| password |
     |PGDATABASE| chathub  |
+    |REDIS_HOST| localhost|
+    |REDIS_PORT| 6379     |
 
 
 
