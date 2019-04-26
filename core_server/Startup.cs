@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using core_server.Models;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.StackExchangeRedis;
 
 namespace core_server
 {
@@ -32,7 +34,6 @@ namespace core_server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSignalR();
             services.AddSwaggerGen( c => {
                 c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
             });
@@ -49,6 +50,8 @@ namespace core_server
         
             services.AddDbContext<UserContext>(options => options.UseNpgsql( $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
 
+            services.AddSignalR().AddStackExchangeRedis($"{REDIS_HOST}:{REDIS_PORT}");
+
             services.AddStackExchangeRedisCache(options=>{
                 options.Configuration = $"{REDIS_HOST}:{REDIS_PORT}";
             });
@@ -58,7 +61,7 @@ namespace core_server
                 options.Cookie.Name = "session-token";
                 options.Cookie.HttpOnly = false;
                 options.IdleTimeout = TimeSpan.FromMinutes(10);
-                options.Cookie.Expiration = TimeSpan.FromMinutes(10);
+                options.Cookie.MaxAge = TimeSpan.FromMinutes(10);
             });
         }
 
