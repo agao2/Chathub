@@ -48,13 +48,17 @@ namespace core_server
             String REDIS_PORT = Environment.GetEnvironmentVariable("REDIS_PORT") ?? "6379";
         
             services.AddDbContext<UserContext>(options => options.UseNpgsql( $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
-            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect($"{REDIS_HOST}:{REDIS_PORT}"));
+
+            services.AddStackExchangeRedisCache(options=>{
+                options.Configuration = $"{REDIS_HOST}:{REDIS_PORT}";
+            });
 
             // The session store automatically uses whatever distributed cache is available, so utilizing Redis for it requires no additional configuration.
             services.AddSession(options => {
                 options.Cookie.Name = "session-token";
-                options.Cookie.HttpOnly = true;
-                ooptions.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = false;
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.Expiration = TimeSpan.FromMinutes(10);
             });
         }
 
@@ -72,6 +76,7 @@ namespace core_server
             }
 
             // app.UseHttpsRedirection();
+            app.UseSession();
             app.UseMvc();
             app.UseSignalR(routes => {
                 routes.MapHub<ChatHub>("/chatHub");
@@ -80,7 +85,6 @@ namespace core_server
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "core api");
             });
-            app.UseSession();
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using core_server.Models;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.Http;
 
 namespace core_server.Controllers
 {
@@ -16,11 +17,9 @@ namespace core_server.Controllers
     {
 
         private readonly UserContext _context;
-        private IConnectionMultiplexer _connectionMultiplexer;
-        public AuthenticationController(UserContext context,IConnectionMultiplexer multiplexer)
+        public AuthenticationController(UserContext context)
         {
             _context = context;
-            this._connectionMultiplexer = multiplexer;
         }
 
         [HttpPost]
@@ -34,6 +33,8 @@ namespace core_server.Controllers
             if (!user.Password.Equals(authentication.Password))
                 return StatusCode(403,"Password or username does not match");
 
+            HttpContext.Session.SetString("test","test");
+
             return new UserDTO
             {
                 Username = user.Username,
@@ -41,7 +42,6 @@ namespace core_server.Controllers
                 Password = user.Password,
                 DateCreated = user.DateCreated
             };
-
         }
 
     }
