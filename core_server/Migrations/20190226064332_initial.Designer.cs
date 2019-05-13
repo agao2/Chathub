@@ -8,7 +8,7 @@ using core_server.Models;
 
 namespace core_server.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20190226064332_initial")]
     partial class initial
     {

@@ -16,8 +16,8 @@ namespace core_server.Controllers
     public class AuthenticationController : ControllerBase
     {
 
-        private readonly UserContext _context;
-        public AuthenticationController(UserContext context)
+        private readonly ApplicationDbContext _context;
+        public AuthenticationController(ApplicationDbContext context)
         {
             _context = context;
         }

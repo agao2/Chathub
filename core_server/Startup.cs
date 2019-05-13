@@ -48,7 +48,7 @@ namespace core_server
             String REDIS_HOST = Environment.GetEnvironmentVariable("REDIS_HOST") ?? "localhost";
             String REDIS_PORT = Environment.GetEnvironmentVariable("REDIS_PORT") ?? "6379";
         
-            services.AddDbContext<UserContext>(options => options.UseNpgsql( $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql( $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
 
             services.AddSignalR().AddStackExchangeRedis($"{REDIS_HOST}:{REDIS_PORT}");
 

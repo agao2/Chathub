@@ -9,7 +9,7 @@ using core_server.Models;
 
 namespace core_server.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20190510224420_Chatrooms")]
     partial class Chatrooms
     {
