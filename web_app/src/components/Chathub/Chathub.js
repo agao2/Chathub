@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Card from '../Card'
+import CardWrapper from '../CardWrapper'
 class Chathub extends Component {
 
     render = () => {
         return (
             <div>
-                <Card />
+                <CardWrapper />
             </div>
         )
     }
