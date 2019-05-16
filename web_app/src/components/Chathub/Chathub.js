@@ -27,13 +27,13 @@ class Chathub extends Component {
         return (
             <div >
                 <Grid container spacing={2}>
-                    <Grid container item xs={12} spacing={24}>
+                    <Grid container item xs={12} spacing={0}>
                         {this.FormRow()}
                     </Grid>
-                    <Grid container item xs={12} spacing={24}>
+                    <Grid container item xs={12} spacing={0}>
                         {this.FormRow()}
                     </Grid>
-                    <Grid container item xs={12} spacing={24}>
+                    <Grid container item xs={12} spacing={0}>
                         {this.FormRow()}
                     </Grid>
                 </Grid>
