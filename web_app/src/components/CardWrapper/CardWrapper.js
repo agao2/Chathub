@@ -12,12 +12,12 @@ const CardWrapper = (props) => {
     return (
         <Card className="CardWrapper">
             <CardContent>
-                <Typography component="h4" variant="h4">
+                <h4>
                     {props.title || "Default Title"}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
+                </h4>
+                <p>
                     {props.subtitle || "Default SubTitle"}
-                </Typography>
+                </p>
             </CardContent>
         </Card>
     );

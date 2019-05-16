@@ -1,4 +1,24 @@
 .CardWrapper {
-    margin:5% 
+    margin:5%;    
+    border : solid;
+    border-style:black; 
 }
+
+.CardWrapper:hover{
+    border-style: solid;
+    border-color: #49C5B6;
+    color: #49C5B6;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+}
+
+.CardWrapper p {
+    color: #757587;
+}
+
+
+
+
 
