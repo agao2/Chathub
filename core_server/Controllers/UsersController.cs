@@ -63,7 +63,7 @@ namespace core_server.Controllers
                 return NotFound("User Not Found");
             
             _context.Users.Remove(user);
-                return Ok("User has been deleted");
+            return Ok("User has been deleted");
         }
     }
 }

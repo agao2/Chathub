@@ -12,4 +12,10 @@ namespace core_server.Models
         public string Name { get; set; }
 
     }
+
+    public class ChatroomDTO
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
 }
