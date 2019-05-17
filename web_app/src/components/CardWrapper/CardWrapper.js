@@ -16,7 +16,7 @@ const CardWrapper = (props) => {
                     {props.title || "Default Title"}
                 </h4>
                 <p>
-                    {props.subtitle || "Default SubTitle"}
+                    {props.subtitle || "Default Subtitle"}
                 </p>
             </CardContent>
         </Card>

@@ -9,14 +9,16 @@ class Chathub extends Component {
     FormRow = (props) => {
         return (
             <React.Fragment>
-                <Grid item xs={4}>
-                    <CardWrapper></CardWrapper>
-                </Grid>
-                <Grid item xs={4}>
-                    <CardWrapper></CardWrapper>
-                </Grid>
-                <Grid item xs={4}>
-                    <CardWrapper></CardWrapper>
+                <Grid container item xs={12} spacing={0}>
+                    <Grid item xs={4}>
+                        <CardWrapper></CardWrapper>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <CardWrapper></CardWrapper>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <CardWrapper></CardWrapper>
+                    </Grid>
                 </Grid>
             </React.Fragment>
         );
@@ -27,15 +29,9 @@ class Chathub extends Component {
         return (
             <div >
                 <Grid container spacing={2}>
-                    <Grid container item xs={12} spacing={0}>
-                        {this.FormRow()}
-                    </Grid>
-                    <Grid container item xs={12} spacing={0}>
-                        {this.FormRow()}
-                    </Grid>
-                    <Grid container item xs={12} spacing={0}>
-                        {this.FormRow()}
-                    </Grid>
+                    {this.FormRow()}
+                    {this.FormRow()}
+                    {this.FormRow()}
                 </Grid>
             </div>
         )

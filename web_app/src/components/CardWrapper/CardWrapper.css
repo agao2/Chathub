@@ -8,10 +8,12 @@
     border-style: solid;
     border-color: #49C5B6;
     color: #49C5B6;
-    -o-transition:.5s;
-    -ms-transition:.5s;
-    -moz-transition:.5s;
-    -webkit-transition:.5s;
+    transition: 0.5s;
+}
+
+.CardWrapper:hover p{
+    color: #49C5B6 !important;
+    transition: 0.5s;
 }
 
 .CardWrapper p {
