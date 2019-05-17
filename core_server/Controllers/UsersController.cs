@@ -30,20 +30,22 @@ namespace core_server.Controllers
 
         //api/Users/2
         [HttpGet("{id}")]
-        public ActionResult<User> Get( int id){
-            User user = _context.Users.Where( u => u.ID == id).SingleOrDefault();
+        public ActionResult<User> Get(int id)
+        {
+            User user = _context.Users.Where(u => u.ID == id).SingleOrDefault();
 
-            if(user == null)
-                return NotFound("User Not Found");
-            
+            if (user == null)
+                return StatusCode(404, "User not found");
+
             return user;
-        }   
+        }
 
         //api/Users
         [HttpPost]
-        public ActionResult<UserDTO> Post (UserDTO userDTO)
+        public ActionResult<UserDTO> Post(UserDTO userDTO)
         {
-            _context.Users.Add(new User{
+            _context.Users.Add(new User
+            {
                 Username = userDTO.Username,
                 EmailAddress = userDTO.EmailAddress,
                 Password = userDTO.Password,
@@ -56,14 +58,15 @@ namespace core_server.Controllers
 
         //api/Users
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id){
-            User user = _context.Users.Where( u => u.ID == id).SingleOrDefault();
+        public ActionResult Delete(int id)
+        {
+            User user = _context.Users.Where(u => u.ID == id).SingleOrDefault();
 
-            if(user == null)
-                return NotFound("User Not Found");
-            
+            if (user == null)
+                return StatusCode(404, "User not found");
+
             _context.Users.Remove(user);
-            return Ok("User has been deleted");
+            return StatusCode(200, "User has been deleted");
         }
     }
 }
