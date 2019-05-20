@@ -5,21 +5,24 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ButtonBase from "@material-ui/core/ButtonBase";
 import './CardWrapper.css'
 
 
 const CardWrapper = (props) => {
     return (
-        <Card className="CardWrapper">
-            <CardContent>
-                <h4>
-                    {props.title || "Default Title"}
-                </h4>
-                <p>
-                    {props.subtitle || "Default Subtitle"}
-                </p>
-            </CardContent>
-        </Card>
+      
+            <Card className="CardWrapper">
+                <CardContent className="CardContent">
+                    <h4>
+                        {props.title || "Default Title"}
+                    </h4>
+                    <p>
+                        {props.subtitle || "Default Subtitle"}
+                    </p>
+                </CardContent>
+            </Card>
+    
     );
 }
 

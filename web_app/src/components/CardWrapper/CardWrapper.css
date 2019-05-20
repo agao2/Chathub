@@ -1,7 +1,7 @@
-.CardWrapper {
-    margin:5%;    
-    border : solid;
-    border-style:black; 
+.CardWrapper { 
+    margin: 1%; 
+    border: solid;
+    border-style: black; 
 }
 
 .CardWrapper:hover{
@@ -9,6 +9,11 @@
     border-color: #49C5B6;
     color: #49C5B6;
     transition: 0.5s;
+}
+
+.CardContent {
+    width: auto;
+    display: block;
 }
 
 .CardWrapper:hover p{
@@ -20,6 +25,9 @@
     color: #757587;
 }
 
+.ButtonBase {
+    margin:auto;
+}
 
 
 
