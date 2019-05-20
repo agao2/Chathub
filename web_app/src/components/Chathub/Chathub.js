@@ -29,7 +29,7 @@ class Chathub extends Component {
     render = () => {
         return (
             <div >
-                <Grid container spacing={2}>
+                <Grid container spacing={8}>
                     {this.FormRow()}
                     {this.FormRow()}
                     {this.FormRow()}

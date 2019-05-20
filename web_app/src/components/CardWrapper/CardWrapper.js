@@ -11,10 +11,15 @@ import './CardWrapper.css'
 
 
 class CardWrapper extends Component {
-    
-    render =  () => {
+
+
+    onCardClick = (event) => {
+        console.log(event)
+    }
+
+    render = () => {
         return (
-            <div>
+            <div onClick={this.onCardClick}>
                 <Card className="CardWrapper">
                     <CardContent className="CardContent">
                         <h4>
@@ -25,7 +30,7 @@ class CardWrapper extends Component {
                         </p>
                     </CardContent>
                 </Card>
-                </div>
+            </div>
         );
     }
 }

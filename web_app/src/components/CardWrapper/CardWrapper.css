@@ -9,6 +9,7 @@
     border-color: #49C5B6;
     color: #49C5B6;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .CardContent {
