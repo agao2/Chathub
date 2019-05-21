@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using core_server.Models;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.Http;
+using core_server.Security;
 
 namespace core_server.Controllers
 {
@@ -17,13 +18,16 @@ namespace core_server.Controllers
     {
 
         private readonly ApplicationDbContext _context;
-        public AuthenticationController(ApplicationDbContext context)
+
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
+        public AuthenticationController(ApplicationDbContext context , IJwtTokenGenerator JwtTokenGenerator)
         {
             _context = context;
+            _jwtTokenGenerator = JwtTokenGenerator;
         }
 
         [HttpPost]
-        public ActionResult<UserDTO> Post(Authentication authentication)
+        public async Task<ActionResult<UserDTO>> Post(Authentication authentication)
         {
             User user = _context.Users.Where(u => u.Username == authentication.Username).SingleOrDefault();
 
@@ -40,7 +44,8 @@ namespace core_server.Controllers
                 Username = user.Username,
                 EmailAddress = user.EmailAddress,
                 Password = user.Password,
-                DateCreated = user.DateCreated
+                DateCreated = user.DateCreated,
+                Token = await _jwtTokenGenerator.CreateToken(user.Username)
             };
         }
 

@@ -25,5 +25,7 @@ namespace core_server.Models
         public string EmailAddress { get; set; }
         public string Password { get; set; }
         public string DateCreated { get; set; }
+
+        public string Token {get;set;}
     }
 }

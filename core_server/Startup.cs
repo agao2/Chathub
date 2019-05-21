@@ -17,6 +17,7 @@ using core_server.Models;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.StackExchangeRedis;
+using core_server.Security;
 
 namespace core_server
 {
@@ -55,6 +56,8 @@ namespace core_server
             services.AddStackExchangeRedisCache(options=>{
                 options.Configuration = $"{REDIS_HOST}:{REDIS_PORT}";
             });
+
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
             // The session store automatically uses whatever distributed cache is available, so utilizing Redis for it requires no additional configuration.
             services.AddSession(options => {
