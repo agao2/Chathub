@@ -15,11 +15,11 @@ namespace core_server.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class ChatroomController : ControllerBase
+    public class ChatroomsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public ChatroomController(ApplicationDbContext context)
+        public ChatroomsController(ApplicationDbContext context)
         {
             _context = context;
         }
