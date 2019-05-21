@@ -14,7 +14,8 @@ class CardWrapper extends Component {
 
 
     onCardClick = (event) => {
-        console.log(event)
+        console.log(this.props)
+        // this.props.history.push("/")
     }
 
     render = () => {
@@ -38,6 +39,7 @@ class CardWrapper extends Component {
 // Card.propTypes = {
 //     Title: PropTypes.object.isRequired,
 //     SubTitle: PropTypes.object.isRequired,
+//     Redirect: PropTypes.object.isRequired,
 // };
 
 export default CardWrapper;

@@ -27,7 +27,9 @@ You can also run utilizing docker with the command:
  `docker run -p 5432:5432 -v ./data:/var/lib/postgresql/data postgres `
 
  To run the migrations for the database, use `dotnet ef database update`
-
+ 
+ To add a migrations for the database, use `dotnet ef migrations add <name>`
+ 
 
 ### How to run tests:
 - `npm test` to run unit test in watch mode. Note that console outputs are configured to show in the terminal.
