@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using core_server.Models;
+using core_server.Domain;
 
 namespace core_server.Migrations
 {
@@ -20,7 +20,7 @@ namespace core_server.Migrations
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("core_server.Models.User", b =>
+            modelBuilder.Entity("core_server.Domain.User", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using core_server.Models;
+using core_server.Domain;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;

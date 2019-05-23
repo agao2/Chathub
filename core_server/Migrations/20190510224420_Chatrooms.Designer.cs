@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using core_server.Models;
+using core_server.Domain;
 
 namespace core_server.Migrations
 {
@@ -21,7 +21,7 @@ namespace core_server.Migrations
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("core_server.Models.Chatroom", b =>
+            modelBuilder.Entity("core_server.Domain.Chatroom", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -33,7 +33,7 @@ namespace core_server.Migrations
                     b.ToTable("Chatrooms");
                 });
 
-            modelBuilder.Entity("core_server.Models.ChatroomMemberships", b =>
+            modelBuilder.Entity("core_server.Domain.ChatroomMemberships", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -51,7 +51,7 @@ namespace core_server.Migrations
                     b.ToTable("ChatroomMemberships");
                 });
 
-            modelBuilder.Entity("core_server.Models.User", b =>
+            modelBuilder.Entity("core_server.Domain.User", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -105,13 +105,13 @@ namespace core_server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("core_server.Models.ChatroomMemberships", b =>
+            modelBuilder.Entity("core_server.Domain.ChatroomMemberships", b =>
                 {
-                    b.HasOne("core_server.Models.Chatroom", "Chatroom")
+                    b.HasOne("core_server.Domain.Chatroom", "Chatroom")
                         .WithMany()
                         .HasForeignKey("ChatroomID");
 
-                    b.HasOne("core_server.Models.User", "User")
+                    b.HasOne("core_server.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID");
                 });
