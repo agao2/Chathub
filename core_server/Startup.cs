@@ -58,6 +58,7 @@ namespace core_server
                 options.Configuration = $"{REDIS_HOST}:{REDIS_PORT}";
             });
 
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddJwt();
             // The session store automatically uses whatever distributed cache is available, so utilizing Redis for it requires no additional configuration.

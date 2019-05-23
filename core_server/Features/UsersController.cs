@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using core_server.Domain;
 using Microsoft.EntityFrameworkCore;
 using core_server.Infrastructure;
+using core_server.Security;
+using Microsoft.AspNetCore.Http;
 
 namespace core_server.Controllers
 {
@@ -16,10 +18,12 @@ namespace core_server.Controllers
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context, IJwtTokenGenerator JwtTokenGenerator)
         {
             _context = context;
+            _jwtTokenGenerator = JwtTokenGenerator;
         }
 
         //api/Users
@@ -70,6 +74,31 @@ namespace core_server.Controllers
 
             _context.Users.Remove(user);
             return StatusCode(200, "User has been deleted");
+        }
+
+        //api/Login
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDTO>> Login (Authentication authentication) {
+
+            User user = _context.Users.Where(u => u.Username == authentication.Username).SingleOrDefault();
+
+            if (user == null)
+                return StatusCode(403,"User does not exist");
+
+            if (!user.Password.Equals(authentication.Password))
+                return StatusCode(403,"Password or username does not match");
+
+            HttpContext.Session.SetString("test","test");
+
+            return new UserDTO
+            {
+                Username = user.Username,
+                EmailAddress = user.EmailAddress,
+                Password = user.Password,
+                DateCreated = user.DateCreated,
+                Token = await _jwtTokenGenerator.CreateToken(user.Username)
+            };
+
         }
     }
 }
