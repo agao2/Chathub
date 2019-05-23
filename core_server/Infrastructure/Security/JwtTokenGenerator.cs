@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
-namespace core_server.Security
+namespace core_server.Infrastructure.Security
 {
     public class JwtTokenGenerator : IJwtTokenGenerator
     {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
-namespace core_server.Security
+namespace core_server.Infrastructure.Security
 {
     public class JwtIssuerOptions
     {

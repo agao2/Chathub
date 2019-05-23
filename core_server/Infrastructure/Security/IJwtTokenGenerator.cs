@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace core_server.Security
+namespace core_server.Infrastructure.Security
 {
     public interface IJwtTokenGenerator
     {

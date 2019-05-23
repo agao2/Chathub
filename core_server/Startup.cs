@@ -18,7 +18,7 @@ using core_server.Infrastructure;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.StackExchangeRedis;
-using core_server.Security;
+using core_server.Infrastructure.Security;
 
 namespace core_server
 {

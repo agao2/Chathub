@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using core_server.Domain;
 using Microsoft.EntityFrameworkCore;
 using core_server.Infrastructure;
-using core_server.Security;
+using core_server.Infrastructure.Security;
 using Microsoft.AspNetCore.Http;
 
 namespace core_server.Controllers

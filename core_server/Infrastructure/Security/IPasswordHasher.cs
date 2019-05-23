@@ -1,4 +1,4 @@
-﻿namespace core_server.Security
+﻿namespace core_server.Infrastructure.Security
 {
     public interface IPasswordHasher
     {
