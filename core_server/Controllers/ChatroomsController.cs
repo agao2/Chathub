@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using core_server.Security;
+using core_server.Infrastructure;
 
 namespace core_server.Controllers
 {

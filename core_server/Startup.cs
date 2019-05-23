@@ -14,6 +14,7 @@ using SignalRChat.Hubs;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using core_server.Domain;
+using core_server.Infrastructure;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.StackExchangeRedis;

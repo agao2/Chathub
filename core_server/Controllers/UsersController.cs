@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using core_server.Domain;
 using Microsoft.EntityFrameworkCore;
+using core_server.Infrastructure;
 
 namespace core_server.Controllers
 {

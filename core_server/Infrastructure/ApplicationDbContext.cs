@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using core_server.Domain;
 
-namespace core_server.Domain
+namespace core_server.Infrastructure
 {
     public class ApplicationDbContext : DbContext
     {
