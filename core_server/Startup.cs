@@ -58,7 +58,7 @@ namespace core_server
             });
 
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-
+            services.AddJwt();
             // The session store automatically uses whatever distributed cache is available, so utilizing Redis for it requires no additional configuration.
             services.AddSession(options => {
                 options.Cookie.Name = "session-token";

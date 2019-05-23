@@ -8,6 +8,8 @@ using core_server.Models;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using core_server.Security;
 
 namespace core_server.Controllers
 {
@@ -26,6 +28,7 @@ namespace core_server.Controllers
 
         //api/Chatroom
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtIssuerOptions.Schemes)]  
         public async Task<IEnumerable<Chatroom>> Get()
         {
             return await _context.Chatrooms.ToListAsync();
