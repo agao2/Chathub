@@ -6,7 +6,7 @@ namespace core_server.Domain
     {
         [Key]
         [Required]
-        public int ID { get; set; }
+        public int UserId { get; set; }
         [Required]
         public string Username { get; set; }
         [Required]

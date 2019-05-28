@@ -39,7 +39,7 @@ namespace core_server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Chatroom>> Get(int id)
         {
-            Chatroom chatroom = await _context.Chatrooms.Where(u => u.ID == id).SingleOrDefaultAsync();
+            Chatroom chatroom = await _context.Chatrooms.Where(u => u.ChatroomId == id).SingleOrDefaultAsync();
 
             if (chatroom == null)
                 return NotFound("Chatroom not found");
@@ -66,7 +66,7 @@ namespace core_server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            Chatroom chatroom = await _context.Chatrooms.Where(u => u.ID == id).SingleOrDefaultAsync();
+            Chatroom chatroom = await _context.Chatrooms.Where(u => u.ChatroomId == id).SingleOrDefaultAsync();
 
             if (chatroom == null)
                 return StatusCode(403, "Chatroom does not exist");

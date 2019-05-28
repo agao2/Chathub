@@ -15,7 +15,7 @@ namespace core_server.Infrastructure
             #region  user seed
             modelBuilder.Entity<User>().HasData(new User
             {
-                ID = 1,
+                UserId = 1,
                 Username = "alex",
                 EmailAddress = "alex@fake.com",
                 Password = "password",
@@ -24,7 +24,7 @@ namespace core_server.Infrastructure
             });
             modelBuilder.Entity<User>().HasData(new User
             {
-                ID = 2,
+                UserId = 2,
                 Username = "rob",
                 EmailAddress = "rob@ss.com",
                 Password = "password",
@@ -33,7 +33,7 @@ namespace core_server.Infrastructure
             });
             modelBuilder.Entity<User>().HasData(new User
             {
-                ID = 3,
+                UserId = 3,
                 Username = "lisa",
                 EmailAddress = "ll@fake.com",
                 Password = "password",

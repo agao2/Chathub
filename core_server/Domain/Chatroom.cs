@@ -7,7 +7,7 @@ namespace core_server.Domain
 
         [Key]
         [Required]
-        public int ID { get; set; }
+        public int ChatroomId { get; set; }
 
         public string Name { get; set; }
 

@@ -37,7 +37,7 @@ namespace core_server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
-            User user = await _context.Users.Where(u => u.ID == id).SingleOrDefaultAsync();
+            User user = await _context.Users.Where(u => u.UserId == id).SingleOrDefaultAsync();
 
             if (user == null)
                 return StatusCode(404, "User not found");
@@ -67,7 +67,7 @@ namespace core_server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            User user = await _context.Users.Where(u => u.ID == id).SingleOrDefaultAsync();
+            User user = await _context.Users.Where(u => u.UserId == id).SingleOrDefaultAsync();
 
             if (user == null)
                 return StatusCode(404, "User not found");
