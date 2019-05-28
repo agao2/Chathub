@@ -10,7 +10,7 @@ using core_server.Infrastructure;
 using core_server.Infrastructure.Security;
 using Microsoft.AspNetCore.Http;
 
-namespace core_server.Controllers
+namespace core_server.Features.Users
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,10 +20,15 @@ namespace core_server.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        public UsersController(ApplicationDbContext context, IJwtTokenGenerator JwtTokenGenerator)
+        private readonly Create _create;
+
+        public UsersController(ApplicationDbContext context,
+                                IJwtTokenGenerator JwtTokenGenerator,
+                                Create create)
         {
             _context = context;
             _jwtTokenGenerator = JwtTokenGenerator;
+            _create = create;
         }
 
         //api/Users
@@ -45,22 +50,11 @@ namespace core_server.Controllers
             return user;
         }
 
-        //api/Users
+        // api/Users
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> Post(UserDTO userDTO)
+        public async Task<Create.UserData> Post(Create.UserData userData)
         {
-            await _context.Users.AddAsync(
-                new User
-                {
-                    Username = userDTO.Username,
-                    EmailAddress = userDTO.EmailAddress,
-                    Password = userDTO.Password,
-                    DateCreated = DateTime.Now.ToString(),
-                    PasswordSalt = "salt"
-                }
-            );
-            _context.SaveChanges();
-            return userDTO;
+            return await _create.Handle(userData);
         }
 
         //api/Users
@@ -77,28 +71,28 @@ namespace core_server.Controllers
         }
 
         //api/Login
-        [HttpPost("login")]
-        public async Task<ActionResult<UserDTO>> Login (Authentication authentication) {
+        // [HttpPost("login")]
+        // public async Task<ActionResult<UserDTO>> Login (Authentication authentication) {
 
-            User user = _context.Users.Where(u => u.Username == authentication.Username).SingleOrDefault();
+        //     User user = _context.Users.Where(u => u.Username == authentication.Username).SingleOrDefault();
 
-            if (user == null)
-                return StatusCode(403,"User does not exist");
+        //     if (user == null)
+        //         return StatusCode(403,"User does not exist");
 
-            if (!user.Password.Equals(authentication.Password))
-                return StatusCode(403,"Password or username does not match");
+        //     if (!user.Password.Equals(authentication.Password))
+        //         return StatusCode(403,"Password or username does not match");
 
-            HttpContext.Session.SetString("test","test");
+        //     HttpContext.Session.SetString("test","test");
 
-            return new UserDTO
-            {
-                Username = user.Username,
-                EmailAddress = user.EmailAddress,
-                Password = user.Password,
-                DateCreated = user.DateCreated,
-                Token = await _jwtTokenGenerator.CreateToken(user.Username)
-            };
+        //     return new UserDTO
+        //     {
+        //         Username = user.Username,
+        //         EmailAddress = user.EmailAddress,
+        //         Password = user.Password,
+        //         DateCreated = user.DateCreated,
+        //         Token = await _jwtTokenGenerator.CreateToken(user.Username)
+        //     };
 
-        }
+        // }
     }
 }
