@@ -20,15 +20,11 @@ namespace core_server.Features.Users
         private readonly ApplicationDbContext _context;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        private readonly Create _create;
-
         public UsersController(ApplicationDbContext context,
-                                IJwtTokenGenerator JwtTokenGenerator,
-                                Create create)
+                                IJwtTokenGenerator JwtTokenGenerator)
         {
             _context = context;
             _jwtTokenGenerator = JwtTokenGenerator;
-            _create = create;
         }
 
         //api/Users
@@ -54,7 +50,8 @@ namespace core_server.Features.Users
         [HttpPost]
         public async Task<Create.UserData> Post(Create.UserData userData)
         {
-            return await _create.Handle(userData);
+            Create create = new Create(_context);
+            return await create.handle(userData);
         }
 
         //api/Users

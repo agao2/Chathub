@@ -38,7 +38,7 @@ namespace core_server.Features.Users
             }
         }
 
-        public async Task<UserData> Handle(UserData data)
+        public async Task<UserData> handle(UserData data)
         {
             UserDataValidator validator = new UserDataValidator();
             var results = validator.Validate(data);
