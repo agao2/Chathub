@@ -19,6 +19,7 @@ using StackExchange.Redis;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.StackExchangeRedis;
 using core_server.Infrastructure.Security;
+using core_server.Infrastructure.Errors;
 
 namespace core_server
 {
@@ -83,6 +84,7 @@ namespace core_server
                 app.UseHsts();
             }
 
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             // app.UseHttpsRedirection();
             app.UseSession();
             app.UseMvc();
