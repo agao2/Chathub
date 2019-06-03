@@ -15,11 +15,11 @@ namespace core_server.Infrastructure.Security
             _jwtOptions = jwtOptions.Value;
         }
 
-        public async Task<string> CreateToken(string username)
+        public async Task<string> CreateToken(string emailAddress)
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, username),
+                new Claim(JwtRegisteredClaimNames.Sub, emailAddress),
                 new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
                 new Claim(JwtRegisteredClaimNames.Iat,
                     new DateTimeOffset(_jwtOptions.IssuedAt).ToUnixTimeSeconds().ToString(),

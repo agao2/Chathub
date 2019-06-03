@@ -67,29 +67,12 @@ namespace core_server.Features.Users
             return StatusCode(200, "User has been deleted");
         }
 
-        //api/Login
-        // [HttpPost("login")]
-        // public async Task<ActionResult<UserDTO>> Login (Authentication authentication) {
-
-        //     User user = _context.Users.Where(u => u.Username == authentication.Username).SingleOrDefault();
-
-        //     if (user == null)
-        //         return StatusCode(403,"User does not exist");
-
-        //     if (!user.Password.Equals(authentication.Password))
-        //         return StatusCode(403,"Password or username does not match");
-
-        //     HttpContext.Session.SetString("test","test");
-
-        //     return new UserDTO
-        //     {
-        //         Username = user.Username,
-        //         EmailAddress = user.EmailAddress,
-        //         Password = user.Password,
-        //         DateCreated = user.DateCreated,
-        //         Token = await _jwtTokenGenerator.CreateToken(user.Username)
-        //     };
-
-        // }
+        // api/Login
+        [HttpPost("login")]
+        public async Task<Login.AuthenticatedUser> Login(Login.LoginData loginData)
+        {
+            Login login = new Login(_context, _jwtTokenGenerator);
+            return await login.handle(loginData);
+        }
     }
 }
