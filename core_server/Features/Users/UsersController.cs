@@ -76,9 +76,6 @@ namespace core_server.Features.Users
         [HttpPost("login")]
         public async Task<Login.AuthenticatedUser> Login(Login.LoginData loginData)
         {
-            // Login login = new Login(_context, _jwtTokenGenerator);
-            // return await login.handle(loginData);
-
             return await _mediator.Send(loginData);
         }
     }
