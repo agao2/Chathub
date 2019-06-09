@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.StackExchangeRedis;
 using core_server.Infrastructure.Security;
 using core_server.Infrastructure.Errors;
+using MediatR;
 
 namespace core_server
 {
@@ -40,6 +41,7 @@ namespace core_server
             services.AddSwaggerGen( c => {
                 c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
             });
+            services.AddMediatR(typeof(Startup));
 
             // Configurations for postgres database
             String PGHOST = Environment.GetEnvironmentVariable("PGHOST") ?? "localhost";

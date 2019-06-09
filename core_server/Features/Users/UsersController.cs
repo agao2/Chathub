@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using core_server.Infrastructure;
 using core_server.Infrastructure.Security;
 using Microsoft.AspNetCore.Http;
+using MediatR;
 
 namespace core_server.Features.Users
 {
@@ -20,11 +21,15 @@ namespace core_server.Features.Users
         private readonly ApplicationDbContext _context;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
+        private readonly IMediator _mediator;
+
         public UsersController(ApplicationDbContext context,
-                                IJwtTokenGenerator JwtTokenGenerator)
+                                IJwtTokenGenerator JwtTokenGenerator,
+                                IMediator mediator)
         {
             _context = context;
             _jwtTokenGenerator = JwtTokenGenerator;
+            _mediator = mediator;
         }
 
         //api/Users
@@ -71,8 +76,10 @@ namespace core_server.Features.Users
         [HttpPost("login")]
         public async Task<Login.AuthenticatedUser> Login(Login.LoginData loginData)
         {
-            Login login = new Login(_context, _jwtTokenGenerator);
-            return await login.handle(loginData);
+            // Login login = new Login(_context, _jwtTokenGenerator);
+            // return await login.handle(loginData);
+
+            return await _mediator.Send(loginData);
         }
     }
 }
