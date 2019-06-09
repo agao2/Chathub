@@ -55,8 +55,7 @@ namespace core_server.Features.Users
         [HttpPost]
         public async Task<Create.UserData> Post(Create.UserData userData)
         {
-            Create create = new Create(_context);
-            return await create.handle(userData);
+            return await _mediator.Send(userData);
         }
 
         //api/Users

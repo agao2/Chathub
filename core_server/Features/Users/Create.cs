@@ -7,19 +7,14 @@ using System.Linq;
 using FluentValidation;
 using core_server.Infrastructure.Errors;
 using System.Net;
+using MediatR;
+using System.Threading;
 
 namespace core_server.Features.Users
 {
     public class Create
     {
-
-        private readonly ApplicationDbContext _context;
-        public Create(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public class UserData
+        public class UserData : IRequest<UserData>
         {
             public string Username { get; set; }
 
@@ -38,35 +33,44 @@ namespace core_server.Features.Users
             }
         }
 
-        public async Task<UserData> handle(UserData data)
+        public class Handler : IRequestHandler<UserData, UserData>
         {
-            UserDataValidator validator = new UserDataValidator();
-            var results = validator.Validate(data);
 
-            // null or empty fields
-            if (results.IsValid == false)
+            private readonly ApplicationDbContext _context;
+            public Handler(ApplicationDbContext context)
             {
-                throw new RestException(HttpStatusCode.BadRequest, results.Errors);
+                _context = context;
             }
 
-            // duplicate user
-            if (await _context.Users.Where(u => u.EmailAddress == data.EmailAddress).AnyAsync())
+            public async Task<UserData> Handle(UserData data, CancellationToken cancellationToken)
             {
-                throw new RestException(HttpStatusCode.BadRequest, "Used email address");
-            }
+                UserDataValidator validator = new UserDataValidator();
+                var results = validator.Validate(data);
 
-            await _context.Users.AddAsync(
-                new User
+                // null or empty fields
+                if (results.IsValid == false)
                 {
-                    Username = data.Username,
-                    EmailAddress = data.EmailAddress,
-                    Password = data.Password,
-                    DateCreated = DateTime.Now.ToString(),
-                    PasswordSalt = "salt"  // TODO : add salting algorithm
+                    throw new RestException(HttpStatusCode.BadRequest, results.Errors);
                 }
-            );
-            _context.SaveChanges();
-            return data;
+
+                // duplicate user
+                if (await _context.Users.Where(u => u.EmailAddress == data.EmailAddress).AnyAsync())
+                {
+                    throw new RestException(HttpStatusCode.BadRequest, "Used email address");
+                }
+
+                await _context.Users.AddAsync(
+                    new User
+                    {
+                        Username = data.Username,
+                        EmailAddress = data.EmailAddress,
+                        Password = data.Password,
+                        DateCreated = DateTime.Now.ToString(),
+                        PasswordSalt = "salt"  // TODO : add salting algorithm
+                    });
+                _context.SaveChanges();
+                return data;
+            }
 
         }
     }
