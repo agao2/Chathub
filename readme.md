@@ -76,7 +76,10 @@ The second instructions runs a container from that image and maps port 8080, the
 Please note that the plugins are listed in a plugins.txt folder. When editing this file on windows, make sure the line endings are converted back for linux as this could cause errors. 
 If you see a lot of illegal characters and 404s and building the  jenkins image, try using `dos2unix plugins.txt` . 
 
+Note to self:
+look into Kaniko : https://github.com/GoogleContainerTools/kaniko#how-does-kaniko-work 
+Idea is to build and push images without needing special permissions or trying to get some docker in docker or docker out of docker solution to work
 
-
+Good articale to explore it: https://harthoover.com/using-kaniko-for-container-builds-on-kubernetes/
 
 
