@@ -80,6 +80,9 @@ Note to self:
 look into Kaniko : https://github.com/GoogleContainerTools/kaniko#how-does-kaniko-work 
 Idea is to build and push images without needing special permissions or trying to get some docker in docker or docker out of docker solution to work
 
+if trying to connec to kubectl from inside a container, get the credentials using
+`kubectl config view --minify --flatten` 
+
 Good articale to explore it: https://harthoover.com/using-kaniko-for-container-builds-on-kubernetes/
 
 
