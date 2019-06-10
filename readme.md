@@ -58,13 +58,25 @@ through a jenkinsfile
 
 ## Starting jenkins 
 1. `docker build -t jenkins -f jenkins/Dockerfile`
-2. `docker run --name -p 8080:8080 jenkins jenkins`
+2. `docker run --name jenkins -p 8080:8080 -v //var/run/docker.sock:/var/run/docker.sock jenkins`
+
+note that here we are mounting the unix socket docker.sock into the container so that it has access to the daemon. You will run into permission problems, run 
+`chmod 777 docker.sock` to make sure that socket has the permission it needs
+
+note that if you are windows , docker.sock exists within the moby linux vm. To change the permission of the docker.sock file within the MobyLinuxVM , 
+do `docker run --privileged -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker alpine sh`
+and run `chmod 777 docker.sock` there. 
+
+alternatively you can just used the --privledged command
+
 
 The first instruction contructs a image with jenkins and all the necessary tools and plugins added to it at image build time. 
 The second instructions runs a container from that image and maps port 8080, the default port for jenkins
 
 Please note that the plugins are listed in a plugins.txt folder. When editing this file on windows, make sure the line endings are converted back for linux as this could cause errors. 
 If you see a lot of illegal characters and 404s and building the  jenkins image, try using `dos2unix plugins.txt` . 
+
+
 
 
 
