@@ -35,3 +35,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: jenkins
+
+
+# https://imti.co/team-kubernetes-remote-access/#setup-remote-access 
+# Look into that to give remote access to a cluster for jenkins to deploy
