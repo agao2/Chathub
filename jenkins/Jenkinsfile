@@ -18,7 +18,7 @@ pipeline {
                 sh "kubectl config unset users"
                 sh "kubectl config unset contexts"
                 sh "kubectl config unset clusters"
-                sh "kubectl config unset current-contexT"
+                sh "kubectl config unset current-context"
 
                 sh "kubectl config set-cluster k8s-cluster --server=${env.server} --insecure-skip-tls-verify=true"
                 sh "kubectl config set-credentaisl ${env.user} --token=${env.token}"
