@@ -1,15 +1,9 @@
-/*
- The pipeline is made up of 6 main steps
-    1. Git clone and setup
-    2. Build and local tests
-    3. Publish Docker and Helm
-    4. Deploy to dev and test
-    5. Deploy to staging and test
-    6. Optionally deploy to production and test
- */
-
+// used for building and pushing images
 def coreServerTag = "agao2/core_server:${env.tag}"
 def webAppTag = "agao2/web_app:${env.tag}"
+
+// pipeline is super in-progress, used for experimenting and teaching myself for now
+// lots to improve on
 
 pipeline {
     agent { node { label 'master' } }  // just use master node i guess
@@ -19,7 +13,41 @@ pipeline {
             steps {
                 echo "grabbing code from repository"
                 git branch: "master", url: 'https://github.com/agao2/Downvoot.git'
+
+                echo "kubectl config cleanup"
+                sh "kubectl config unset users"
+                sh "kubectl config unset contexts"
+                sh "kubectl config unset clusters"
+                sh "kubectl config unset current-contexT"
+
+                sh "kubectl config set-cluster k8s-cluster --server=${env.server} --insecure-skip-tls-verify=true"
+                sh "kubectl config set-credentaisl ${env.user} --token=${env.token}"
+                sh "kubectl config set-context k8s-context --server=k8s-cluster --user=${env.user}"
+                sh "kubectl config use-context k8s-context"
+
                 sh "kubectl cluster-info"
+            }
+        }
+
+        stage('Build and push image')
+        {
+            steps
+            {
+                // assume docker server is accessible and we're pushing to right registry 
+                sh "docker build -t ${coreServerTag} -f ../core_server/prod.Dockerfile ."
+                sh "docker push ${coreServerTag}"
+                sh "docker build -t ${webAppTag} -f ../web_app/prod.Dockerfile ."
+                sh "docker-push ${webAppTag}"
+            }
+        }
+
+        stage ('Deploy')
+        {
+            steps 
+            {
+                sh 'kubectl apply -f ../kubernetes/'
+
+                // TODO curl test to see if app is alive and well
             }
         }
     }

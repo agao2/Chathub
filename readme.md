@@ -86,3 +86,9 @@ if trying to connec to kubectl from inside a container, get the credentials usin
 Good articale to explore it: https://harthoover.com/using-kaniko-for-container-builds-on-kubernetes/
 
 
+Good link below to setup remote access to the cluster, useful if trying to setup kubectl
+to connect for jenkins. 
+https://imti.co/team-kubernetes-remote-access/#setup-remote-access 
+Look into that to give remote access to a cluster for jenkins to deploy
+
+
