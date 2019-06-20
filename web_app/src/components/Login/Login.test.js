@@ -23,8 +23,7 @@ test('onSubmit is called when login button is clicked ', () => {
     expect(mockProps.authenticate).toHaveBeenCalled();
 })
 
-test('sucessfully logged in user redirects to home page' , async () => {
-
+test('sucessfully logged in user redirects' , async () => {
     const mockProps = {
         authenticate: jest.fn(),
         User: {username: "test name"},
@@ -32,8 +31,20 @@ test('sucessfully logged in user redirects to home page' , async () => {
     }
     const {container} = render(<Login {...mockProps} />);
     fireEvent.click(container.querySelector("#submit"));
-    await mockProps.authenticate();
+    await Promise.resolve();
     expect(mockProps.history.push).toHaveBeenCalled();
+})
+
+test('no user does not redirect' , async () => {
+    const mockProps = {
+        authenticate: jest.fn(),
+        User: null,
+        history: {push : jest.fn()}
+    }
+    const {container} = render(<Login {...mockProps} />);
+    fireEvent.click(container.querySelector("#submit"));
+    await Promise.resolve();
+    expect(mockProps.history.push).not.toHaveBeenCalled();
 })
 
 
