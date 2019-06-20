@@ -31,7 +31,7 @@ test('sucessfully logged in user redirects' , async () => {
     }
     const {container} = render(<Login {...mockProps} />);
     fireEvent.click(container.querySelector("#submit"));
-    await Promise.resolve();
+    await expect(mockProps.authenticate).toHaveReturned();
     expect(mockProps.history.push).toHaveBeenCalled();
 })
 
@@ -43,7 +43,7 @@ test('no user does not redirect' , async () => {
     }
     const {container} = render(<Login {...mockProps} />);
     fireEvent.click(container.querySelector("#submit"));
-    await Promise.resolve();
+    await expect(mockProps.authenticate).toHaveReturned();
     expect(mockProps.history.push).not.toHaveBeenCalled();
 })
 
