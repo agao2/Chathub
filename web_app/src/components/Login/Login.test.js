@@ -23,22 +23,17 @@ test('onSubmit is called when login button is clicked ', () => {
     expect(mockProps.authenticate).toHaveBeenCalled();
 })
 
-    // it('Editting username inputs should set username', () => {
-    //     const wrapper = shallow(<Login />)
-    //     wrapper.find('#username').simulate("change", { target: { value: "alex", id: "username" } });
-    //     expect(wrapper.state().username).toEqual("alex");
-    // })
+test('sucessfully logged in user redirects to home page' , async () => {
 
-    // it('Editing password input should set password', () => {
-    //     const wrapper = shallow(<Login />)
-    //     wrapper.find("#password").simulate("change", { target: { value: "password", id: "password" } });
-    //     expect(wrapper.state().password).toEqual("password");
-    // })
-
-    // it('Login button makes authenticate api call', () => {
-    //     const wrapper = shallow(<Login {...mockProps} />);
-    //     wrapper.find('#submit').prop('onClick')();
-    //     expect(mockProps.authenticate).toHaveBeenCalled();
-    // })
+    const mockProps = {
+        authenticate: jest.fn(),
+        User: {username: "test name"},
+        history: {push : jest.fn()}
+    }
+    const {container} = render(<Login {...mockProps} />);
+    fireEvent.click(container.querySelector("#submit"));
+    await mockProps.authenticate();
+    expect(mockProps.history.push).toHaveBeenCalled();
+})
 
 
