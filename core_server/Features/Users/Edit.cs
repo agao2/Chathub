@@ -27,9 +27,8 @@ namespace core_server.Features.Users
         {
             public EditDataValidator()
             {
-                RuleFor(x => x.Username).NotNull();
-                RuleFor(x => x.EmailAddress).NotNull().NotEmpty();
-                RuleFor(x => x.Password).NotNull();
+               
+                RuleFor(x => x.EmailAddress).NotEmpty();
             }
         }
 
