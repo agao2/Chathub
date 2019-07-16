@@ -19,7 +19,7 @@ class Login extends Component {
 
   onSubmit = async () => {
     await this.props.authenticate({
-      username:this.state.username, 
+      emailAddress:this.state.emailAddress, 
       password:this.state.password
     })
     if(this.props.User){
@@ -31,7 +31,7 @@ class Login extends Component {
     return (
       <div className="box" >
         <h1>login</h1>
-        <input type="text" name="username" id="username" placeholder="Username" autoComplete="off" defaultValue={this.state.username} onChange={this.onChange} />
+        <input type="text" name="emailAddress" id="emailAddress" placeholder="emailAddress" autoComplete="off" defaultValue={this.state.emailAddress} onChange={this.onChange} />
         <input type="password" name="password" id="password" placeholder="Password" autoComplete="off" defaultValue={this.state.password} onChange={this.onChange} />
         <input type="submit" id="submit" defaultValue="login" onClick={this.onSubmit} />
       </div>

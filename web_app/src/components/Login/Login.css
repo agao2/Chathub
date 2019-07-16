@@ -28,7 +28,7 @@
   /************** 
    Input Fields
   ***************/
-  #username, #password{
+  #emailAddress, #password{
     border: 2px solid #0097e6;
     background: none;
     display: block;
@@ -44,13 +44,13 @@
   /************** 
      On Hover
   ***************/
-  #username:hover, #password:hover{
+  #emailAddress:hover, #password:hover{
     width: 220px;
   }
   /************** 
      On Focus
   ***************/
-  #username:focus, #password:focus{
+  #emailAddress:focus, #password:focus{
     width: 250px;
     border-color: #6fb98f;
   }
