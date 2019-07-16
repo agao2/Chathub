@@ -13,8 +13,8 @@ class Routes extends Component {
             <div>
                 <Navibar {...this.props} ></Navibar>
                 <Switch>
-                    <Route path="/Chatroom" component={(routeProps) => <Chathub {...this.props} {...routeProps} />} />
-                    <Route path="/" component={(routeProps) => <Chatroom {...this.props} {...routeProps} />} />
+                    <Route path="/chatroom" component={(routeProps) => <Chatroom {...this.props} {...routeProps} />} />
+                    <Route path="/" component={(routeProps) => <Chathub {...this.props} {...routeProps} />} />
                 </Switch>
             </div>
         )

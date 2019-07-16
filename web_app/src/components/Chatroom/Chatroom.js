@@ -10,6 +10,7 @@ class Chatroom extends Component {
 
     constructor(props) {
         super(props);
+        this.room = new URLSearchParams(props.location.search).get("room"); 
         this.state = {
             messages: [
                 {
@@ -32,7 +33,6 @@ class Chatroom extends Component {
     componentDidMount = async () => {
         const hubConnection = await new HubConnectionBuilder()
             .withUrl('/chathub')
-            // .withUrl('http://localhost:5000/chathub')
             .build();
 
         this.props.addConnection(hubConnection)
@@ -61,10 +61,12 @@ class Chatroom extends Component {
             })
             this.setState({ messages: messages })
         });
+
+        this.state.hubConnection.invoke("addToGroup", this.props.User.username, this.room || "default")
     }
 
     onSendMessage = (message) => {
-        this.state.hubConnection.invoke('sendMessage', this.props.User.username, message);
+        this.state.hubConnection.invoke('sendMessage', this.props.User.username, this.props.User.username, message);
     }
 
     render() {
