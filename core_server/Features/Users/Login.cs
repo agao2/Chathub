@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using core_server.Domain;
-using StackExchange.Redis;
-using Microsoft.AspNetCore.Http;
 using core_server.Infrastructure;
 using core_server.Infrastructure.Security;
 using core_server.Infrastructure.Errors;

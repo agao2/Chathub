@@ -17,65 +17,32 @@ namespace core_server.Features.Users
     [ApiController]
     public class UsersController : ControllerBase
     {
-
-        private readonly ApplicationDbContext _context;
-        private readonly IJwtTokenGenerator _jwtTokenGenerator;
-
         private readonly IMediator _mediator;
 
-        public UsersController(ApplicationDbContext context,
-                                IJwtTokenGenerator JwtTokenGenerator,
-                                IMediator mediator)
+        public UsersController( IMediator mediator)
         {
-            _context = context;
-            _jwtTokenGenerator = JwtTokenGenerator;
             _mediator = mediator;
         }
 
-        //api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Get()
-        {
-            return await _context.Users.ToListAsync();
-        }
 
-        //api/Users/2
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(int id)
-        {
-            User user = await _context.Users.Where(u => u.UserId == id).SingleOrDefaultAsync();
-
-            if (user == null)
-                return StatusCode(404, "User not found");
-
-            return user;
-        }
-
-        // api/Users
+        //POST api/Users
         [HttpPost]
-        public async Task<Create.UserData> Post(Create.UserData userData)
+        public async Task<Create.UserData> Post(Create.UserData data)
         {
-            return await _mediator.Send(userData);
+            return await _mediator.Send(data);
         }
 
-        //api/Users
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            User user = await _context.Users.Where(u => u.UserId == id).SingleOrDefaultAsync();
-
-            if (user == null)
-                return StatusCode(404, "User not found");
-
-            _context.Users.Remove(user);
-            return StatusCode(200, "User has been deleted");
+        //PATCH api/Users
+        [HttpPatch]
+        public async Task<Edit.EditData> Edit (Edit.EditData data){
+            return await _mediator.Send(data);
         }
 
-        // api/Login
+        // api/Users/Login
         [HttpPost("login")]
-        public async Task<Login.AuthenticatedUser> Login(Login.LoginData loginData)
+        public async Task<Login.AuthenticatedUser> Login(Login.LoginData data)
         {
-            return await _mediator.Send(loginData);
+            return await _mediator.Send(data);
         }
     }
 }
