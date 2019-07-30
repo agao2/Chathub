@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Infrastructure.Hubs
+namespace core_server.Features
 {
     public class ChatHub : Hub
     {
