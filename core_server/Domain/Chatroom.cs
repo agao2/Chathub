@@ -12,10 +12,4 @@ namespace core_server.Domain
         public string Name { get; set; }
 
     }
-
-    public class ChatroomDTO
-    {
-        public int ID { get; set; }
-        public string Name { get; set; }
-    }
 }

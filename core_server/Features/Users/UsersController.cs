@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using core_server.Domain;
-using Microsoft.EntityFrameworkCore;
-using core_server.Infrastructure;
-using core_server.Infrastructure.Security;
-using Microsoft.AspNetCore.Http;
 using MediatR;
 
 namespace core_server.Features.Users
@@ -19,7 +11,7 @@ namespace core_server.Features.Users
     {
         private readonly IMediator _mediator;
 
-        public UsersController( IMediator mediator)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -34,7 +26,8 @@ namespace core_server.Features.Users
 
         //PATCH api/Users
         [HttpPatch]
-        public async Task<Edit.EditData> Edit (Edit.EditData data){
+        public async Task<Edit.EditData> Edit(Edit.EditData data)
+        {
             return await _mediator.Send(data);
         }
 
