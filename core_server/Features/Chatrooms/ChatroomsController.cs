@@ -24,12 +24,12 @@ namespace core_server.Features.Chatrooms
             _mediator = mediator;
         }
 
-        //api/Chatroom/{name}
-        [HttpGet("name")]
-        public async Task<IEnumerable<Chatroom>> Get(string name)
+        //api/Chatrooms/{name}
+        [HttpGet]
+        public async Task<IEnumerable<Chatroom>> Get(string username)
         {
             List.Query query = new List.Query {
-                Name = name
+                Name = username
             };
             return await _mediator.Send(query);
         }
@@ -37,12 +37,12 @@ namespace core_server.Features.Chatrooms
 
 
         //api/Chatrooms
-        // [HttpPost]
-        // [Authorize(AuthenticationSchemes = JwtIssuerOptions.Schemes)]  
-        // public async Task<Chatroom> Post()
-        // {
-            
-        // }
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtIssuerOptions.Schemes)]  
+        public async Task<Create.ChatroomData> Post(Create.ChatroomData chatroomData)
+        {   
+            return await _mediator.Send(chatroomData);
+        }
 
         // //api/Chatrooms
         // [HttpDelete("{id}")]
