@@ -70,6 +70,21 @@ The second instructions runs a container from that image and maps port 8080, the
 Plugins are listed in a plugins.txt folder. When editing this file on windows, make sure the line endings are converted back for linux as this could cause errors. 
 If you see a lot of illegal characters and 404s and building the  jenkins image, try using `dos2unix plugins.txt` . 
 
+You might need to preconfigure kubectl inside jenkins container so kubectl points to the right cluster and has access. 
+You can also just run it in Kubernetes, where it picks up the local pod credentials to access the Kubernetes API.
+```
+kubectl config unset users"
+kubectl config unset contexts"
+kubectl config unset clusters"
+kubectl config unset current-context"
+
+kubectl config set-cluster k8s-cluster --server=${server} --insecure-skip-tls-verify=true"
+kubectl config set-credentaisl ${env.user} --token=${token}"
+kubectl config set-context k8s-context --server=k8s-cluster --user=${user}"
+kubectl config use-context k8s-context"
+kubectl cluster-info"
+```
+
 Possible Problems:
 1. Docker is not working inside jenkins container
     - make sure that the unix socket docker.sock is being mounted correctly in the container. If you run into permission problems use `chmod 777 docker.sock`

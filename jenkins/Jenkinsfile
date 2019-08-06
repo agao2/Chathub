@@ -1,34 +1,17 @@
-// used for building and pushing images
 def coreServerTag = "agao2/core_server:${env.tag}"
 def webAppTag = "agao2/web_app:${env.tag}"
 
-// pipeline is super in-progress, used for experimenting and teaching myself for now
-// lots to improve on
 
 pipeline {
-    agent { node { label 'master' } }  // just use master node i guess
+    agent { node { label 'master' } }  // just use master i guess
 
  stages {
-        stage('Git clone and setup') {
+        stage('Git clone') {
             steps {
                 echo "grabbing code from repository"
                 git branch: "master", url: 'https://github.com/agao2/Downvoot.git'
-
-                echo "kubectl config cleanup"
-                sh "kubectl config unset users"
-                sh "kubectl config unset contexts"
-                sh "kubectl config unset clusters"
-                sh "kubectl config unset current-context"
-
-                sh "kubectl config set-cluster k8s-cluster --server=${env.server} --insecure-skip-tls-verify=true"
-                sh "kubectl config set-credentaisl ${env.user} --token=${env.token}"
-                sh "kubectl config set-context k8s-context --server=k8s-cluster --user=${env.user}"
-                sh "kubectl config use-context k8s-context"
-
-                sh "kubectl cluster-info"
             }
         }
-
         stage('Build and push image')
         {
             steps
@@ -40,14 +23,11 @@ pipeline {
                 sh "docker-push ${webAppTag}"
             }
         }
-
         stage ('Deploy')
         {
             steps 
             {
                 sh 'kubectl apply -f ../kubernetes/'
-
-                // TODO curl test to see if app is alive and well
             }
         }
     }
