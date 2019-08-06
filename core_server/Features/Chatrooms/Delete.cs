@@ -36,16 +36,24 @@ namespace core_server.Features.Chatrooms
                 _context = context;
             }
 
-            public async Task<int> Handle(DeleteCommand command, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
                 DeleteCommandValidator validator = new DeleteCommandValidator();
                 var results = validator.Validate(command);
 
-                 // null or empty fields
+                // null or empty fields
                 if (results.IsValid == false)
-                {
                     throw new RestException(HttpStatusCode.BadRequest, results.Errors);
-                }
+
+
+                Chatroom chatroom = await _context.Chatrooms.FirstOrDefaultAsync(c => c.ChatroomId == command.Id);
+
+                if (chatroom == null)
+                    throw new RestException(HttpStatusCode.NotFound, "Chatroom not found");
+
+                _context.Chatrooms.Remove(chatroom);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Unit.Value;
             }
         }
     }
