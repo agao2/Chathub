@@ -29,8 +29,17 @@ namespace core_server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSwaggerGen( c => {
-                c.SwaggerDoc("v1", new Info {Title = "core api" , Version = "v1"});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "core api", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    In = "header",
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
             });
             services.AddMediatR(typeof(Startup));
 
@@ -43,12 +52,13 @@ namespace core_server
             // Configurations for redis
             String REDIS_HOST = Environment.GetEnvironmentVariable("REDIS_HOST") ?? "localhost";
             String REDIS_PORT = Environment.GetEnvironmentVariable("REDIS_PORT") ?? "6379";
-        
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql( $"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql($"Host={PGHOST};Port={PGPORT};Username={PGUSER};Password={PGPASSWORD};Database={PGDATABASE}"));
 
             services.AddSignalR().AddStackExchangeRedis($"{REDIS_HOST}:{REDIS_PORT}");
 
-            services.AddStackExchangeRedisCache(options=>{
+            services.AddStackExchangeRedisCache(options =>
+            {
                 options.Configuration = $"{REDIS_HOST}:{REDIS_PORT}";
             });
 
@@ -56,7 +66,8 @@ namespace core_server
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddJwt();
             // The session store automatically uses whatever distributed cache is available, so utilizing Redis for it requires no additional configuration.
-            services.AddSession(options => {
+            services.AddSession(options =>
+            {
                 options.Cookie.Name = "session-token";
                 options.Cookie.HttpOnly = false;
                 options.IdleTimeout = TimeSpan.FromMinutes(10);
@@ -81,11 +92,13 @@ namespace core_server
             // app.UseHttpsRedirection();
             app.UseSession();
             app.UseMvc();
-            app.UseSignalR(routes => {
+            app.UseSignalR(routes =>
+            {
                 routes.MapHub<ChatHub>("/chatHub");
             });
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "core api");
             });
         }

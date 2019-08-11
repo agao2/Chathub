@@ -67,9 +67,9 @@ namespace core_server.Infrastructure.Security
         public DateTime IssuedAt => DateTime.UtcNow;
 
         /// <summary>
-        /// Set the timespan the token will be valid for (default is 5 min/300 seconds)
+        /// Set the timespan the token will be valid for (default is 10 min/600 seconds)
         /// </summary>
-        public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(5);
+        public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(10);
 
         /// <summary>
         /// "exp" (Expiration Time) Claim (returns IssuedAt + ValidFor)
