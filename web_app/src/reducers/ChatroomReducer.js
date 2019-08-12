@@ -1,20 +1,28 @@
 
 import { actions } from '../actions/ChatroomActions'
+import { object } from 'prop-types';
+const defaultState = {
+    data: [],
+    loading: false
+}
 
-const Chatrooms = (state = {}, action) => {
+const Chatrooms = (state = defaultState, action) => {
     switch (action.type) {
         case actions.CREATE_CHATROOM:
             //todo , add api call to create chatroom and add it to list
             return state;
 
         case actions.GET_CHATROOMS:
-            return Object.assign({}, state, action.chatrooms);
+            return {...state , loading: true};
+        
+        case actions.REQUEST_SUCESS: 
+            return {...state , loading: false,  data: action.chatrooms  }
 
         case actions.REQUEST_FAILED:
             return null;
 
         default:
-            return state;
+            return defaultState;
     }
 }
 

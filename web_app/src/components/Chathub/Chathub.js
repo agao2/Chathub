@@ -35,13 +35,38 @@ class Chathub extends Component {
     }
 
 
+    // takes an array and chunks it into sizes
+    chunkArray(array, chunk_size) {
+        var index = 0;
+        var arrayLength = array.length;
+        var tempArray = [];
+
+        for (index = 0; index < arrayLength; index += chunk_size) {
+            let myChunk = array.slice(index, index + chunk_size);
+            tempArray.push(myChunk);
+        }
+        return tempArray;
+    }
+
+
     render = () => {
+        if(this.props.Chatrooms.loading){
+            // TODO render a loading icon
+            return null;
+        }
+        // console.log(this.props.Chatrooms.data)
+        
+        // let rows =[];
+        // let grid = [];
+        // if (this.props.Chatrooms.data.length > 0) {
+        //     let rows = this.chunkArray(this.props.Chatrooms.data, 3)
+        //     console.log(rows);
+        // }
+
         return (
             <div >
                 <Grid container spacing={8}>
-                    {this.FormRow(this.props)}
-                    {this.FormRow(this.props)}
-                    {this.FormRow(this.props)}
+                  
                 </Grid>
             </div>
         )

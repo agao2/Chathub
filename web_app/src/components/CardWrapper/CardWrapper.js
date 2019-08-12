@@ -26,9 +26,9 @@ class CardWrapper extends Component {
                         <h4>
                             {this.props.title || "Default Title"}
                         </h4>
-                        <p>
+                        {/* <p>
                             {this.props.subtitle || "Default Subtitle"}
-                        </p>
+                        </p> */}
                     </CardContent>
                 </Card>
             </div>
