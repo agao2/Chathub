@@ -25,7 +25,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: () => dispatch(getUser),
+    getUser: () => dispatch(getUser()),
     authenticate: (user) => dispatch(authenticate(user))
   }
 }
