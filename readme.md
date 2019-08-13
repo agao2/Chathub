@@ -70,6 +70,8 @@ The second instructions runs a container from that image and maps port 8080, the
 Plugins are listed in a plugins.txt folder. When editing this file on windows, make sure the line endings are converted back for linux as this could cause errors. 
 If you see a lot of illegal characters and 404s and building the  jenkins image, try using `dos2unix plugins.txt` . 
 
+If images aren't being pushed to the right registry, make sure you are logged in correctly. To use a public registry, do `docker login docker.io`
+
 You might need to preconfigure kubectl inside jenkins container so kubectl points to the right cluster and has access. 
 You can also just run it in Kubernetes, where it picks up the local pod credentials to access the Kubernetes API.
 ```
@@ -78,9 +80,12 @@ kubectl config unset contexts"
 kubectl config unset clusters"
 kubectl config unset current-context"
 
+kubectl create serviceaccount {user}
+kubectl describe secret {user}
+
 kubectl config set-cluster k8s-cluster --server=${server} --insecure-skip-tls-verify=true"
-kubectl config set-credentaisl ${env.user} --token=${token}"
-kubectl config set-context k8s-context --server=k8s-cluster --user=${user}"
+kubectl config set-credentails ${env.user} --token=${token}"
+kubectl config set-context k8s-context --cluster=k8s-cluster --user=${user}"
 kubectl config use-context k8s-context"
 kubectl cluster-info"
 ```

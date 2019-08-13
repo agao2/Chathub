@@ -1,7 +1,7 @@
-def coreServerTag = "agao2/core_server:${env.tag}"
-def webAppTag = "agao2/web_app:${env.tag}"
-
-
+/*
+Note that this pipeline assumes that you have docker and kubectl preconfigured and pointing to where you want. 
+The images are tagged using the buildId, you can track pushed images to the exact build.
+*/
 pipeline {
     agent { node { label 'master' } }  // just use master i guess
 
@@ -12,22 +12,33 @@ pipeline {
                 git branch: "master", url: 'https://github.com/agao2/Downvoot.git'
             }
         }
-        stage('Build and push image')
+        stage('Build images')
         {
             steps
             {
-                // assume docker server is accessible and we're pushing to right registry 
-                sh "docker build -t ${coreServerTag} -f ../core_server/prod.Dockerfile ."
-                sh "docker push ${coreServerTag}"
-                sh "docker build -t ${webAppTag} -f ../web_app/prod.Dockerfile ."
-                sh "docker-push ${webAppTag}"
+                sh 'ls ./core_server'
+                sh 'ls ./web_app'
+                sh "docker build -t agao2/core_server:${env.BUILD_ID} -f ./core_server/prod.Dockerfile ./core_server"
+                sh "docker build -t agao2/web_app:${env.BUILD_ID} -f ./web_app/prod.Dockerfile ./web_app"
+            }
+        }
+        stage('Push images')
+        {
+            steps
+            {
+                sh "docker images agao2/core_server"
+                sh "docker push agao2/core_server:${env.BUILD_ID}"
+                sh "docker images agao2/web_app"
+                sh "docker push agao2/web_app:${env.BUILD_ID}"
             }
         }
         stage ('Deploy')
         {
             steps 
             {
-                sh 'kubectl apply -f ../kubernetes/'
+                sh 'ls ./kubernetes'
+                sh 'kubectl cluster-info'
+                sh 'kubectl apply -f ./kubernetes/'
             }
         }
     }
