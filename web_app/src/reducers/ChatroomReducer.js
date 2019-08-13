@@ -13,10 +13,10 @@ const Chatrooms = (state = defaultState, action) => {
             return state;
 
         case actions.GET_CHATROOMS:
-            return {...state , loading: true};
-        
-        case actions.REQUEST_SUCESS: 
-            return {...state , loading: false,  data: action.chatrooms  }
+            return { ...state, loading: true };
+
+        case actions.REQUEST_SUCESS:
+            return { ...state, loading: false, data: action.chatrooms }
 
         case actions.REQUEST_FAILED:
             return null;

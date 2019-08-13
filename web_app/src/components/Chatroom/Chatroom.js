@@ -66,7 +66,7 @@ class Chatroom extends Component {
     }
 
     onSendMessage = (message) => {
-        this.state.hubConnection.invoke('sendMessage', this.props.User.username, this.props.User.username, message);
+        this.state.hubConnection.invoke('SendMessageToGroup', this.room, this.props.User.username, message);
     }
 
     render() {

@@ -16,19 +16,15 @@ class Chathub extends Component {
         this.props.getChatrooms();
     }
 
-    FormRow = (props) => {
+    FormRow = (row, index) => {
         return (
-            <React.Fragment>
+            <React.Fragment key={index}>
                 <Grid container item xs={12} spacing={0}>
-                    <Grid item xs={4} className="GridItemCenter">
-                        <CardWrapper {...props} ></CardWrapper>
-                    </Grid>
-                    <Grid item xs={4} className="GridItemCenter" >
-                        <CardWrapper {...props}></CardWrapper>
-                    </Grid>
-                    <Grid item xs={4} className="GridItemCenter">
-                        <CardWrapper {...props}></CardWrapper>
-                    </Grid>
+                    {row.map((column, index) => (
+                        <Grid item xs={4} key={index} className="GridItemCenter">
+                            <CardWrapper {...column} history={this.props.history} ></CardWrapper>
+                        </Grid>
+                    ))}
                 </Grid>
             </React.Fragment>
         );
@@ -50,23 +46,20 @@ class Chathub extends Component {
 
 
     render = () => {
-        if(this.props.Chatrooms.loading){
-            // TODO render a loading icon
+        if (this.props.Chatrooms.loading) {
             return null;
         }
-        // console.log(this.props.Chatrooms.data)
-        
-        // let rows =[];
-        // let grid = [];
-        // if (this.props.Chatrooms.data.length > 0) {
-        //     let rows = this.chunkArray(this.props.Chatrooms.data, 3)
-        //     console.log(rows);
-        // }
+
+        let rows = [];
+        if (this.props.Chatrooms.data.length > 0) {
+            rows = this.chunkArray(this.props.Chatrooms.data, 3)
+        }
+
 
         return (
             <div >
                 <Grid container spacing={8}>
-                  
+                    {rows.map((row, index) => (this.FormRow(row, index)))}
                 </Grid>
             </div>
         )

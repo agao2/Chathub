@@ -15,7 +15,7 @@ class CardWrapper extends Component {
 
     onCardClick = (event) => {
         console.log(this.props)
-        // this.props.history.push("/")
+        this.props.history.push(`/chatroom/?room=${this.props.name}`)
     }
 
     render = () => {
@@ -24,11 +24,11 @@ class CardWrapper extends Component {
                 <Card className="CardWrapper">
                     <CardContent className="CardContent">
                         <h4>
-                            {this.props.title || "Default Title"}
+                            {this.props.name || "Default Title"}
                         </h4>
-                        {/* <p>
-                            {this.props.subtitle || "Default Subtitle"}
-                        </p> */}
+                        <p>
+                            {/* {"100"} */}
+                        </p>
                     </CardContent>
                 </Card>
             </div>
