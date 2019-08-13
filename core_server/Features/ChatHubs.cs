@@ -21,10 +21,10 @@ namespace core_server.Features
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
-        public Task SendMessageToGroup(string groupName, string user, string message)
+        public async Task SendMessageToGroup(string groupName, string user, string message)
         {
             _logger.LogCritical($"In group: {groupName} and sending message: {message}");
-            return Clients.Group(groupName).SendAsync("ReceiveMessage", $"{user}: {message}");
+            await Clients.Group(groupName).SendAsync("ReceiveMessage", $"{user}: {message}");
         }
 
         public async Task AddToGroup(string user, string groupName)
