@@ -6,11 +6,11 @@ replicaCount: 1
 
 clientImage:
   repository: registry.hub.docker.com/agao2/web_app
-  tag: latest
+  tag: 30
 
 serverImage:
   repository: registry.hub.docker.com/agao2/core_server
-  tag: latest
+  tag: 30
 
 persistentVolume:
   size: 2Gi

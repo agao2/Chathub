@@ -1,4 +1,4 @@
-namespace: prod
+namespace: chathub-prod
 env:
     - name: PGHOST  
       value: postgres-cluster-ip-service
