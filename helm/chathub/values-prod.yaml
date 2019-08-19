@@ -1,0 +1,17 @@
+namespace: prod
+env:
+    - name: PGHOST  
+      value: postgres-cluster-ip-service
+    - name: PGPORT  
+      value: '5432'
+    - name: PGUSER
+      value: postgres
+    - name: PGPASSWORD  
+      value: password
+    - name: PGDATABASE 
+      value: chathub
+    - name: REDIS_HOST
+      value: redis-cluster-ip-service
+    - name: REDIS_PORT 
+      value: '6379'
+    

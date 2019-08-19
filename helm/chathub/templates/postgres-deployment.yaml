@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: postgres-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -14,12 +14,16 @@ spec:
         app.kubernetes.io/name: {{ include "chathub.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
       containers:
-        - name: client-deployment
-          image: "{{.Values.clientImage.repository}}:{{ .Values.clientImage.tag }}"
+        - name: postgres
+          image: postgres:latest
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 5432
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -30,3 +34,4 @@ spec:
               path: /
               port: http
           
+

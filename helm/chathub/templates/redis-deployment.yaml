@@ -1,7 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: redis-deployment
+  labels:
+    app.kubernetes.io/name: {{ include "chathub.name" . }}
+    helm.sh/chart: {{ include "chathub.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -15,11 +20,11 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: client-deployment
-          image: "{{.Values.clientImage.repository}}:{{ .Values.clientImage.tag }}"
+        - name: redis
+          image: "redis:latest"
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 6379
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -29,4 +34,5 @@ spec:
             httpGet:
               path: /
               port: http
-          
+     
+

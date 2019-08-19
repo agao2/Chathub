@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: server-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -15,11 +15,11 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: client-deployment
-          image: "{{.Values.clientImage.repository}}:{{ .Values.clientImage.tag }}"
+        - name: {{ .Chart.Name }}
+          image: "{{.Values.serverImage.repository}}:{{ .Values.serverImage.tag }}"
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 5000
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -29,4 +29,5 @@ spec:
             httpGet:
               path: /
               port: http
-          
+
+
