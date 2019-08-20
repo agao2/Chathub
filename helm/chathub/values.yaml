@@ -4,21 +4,30 @@
 
 replicaCount: 1
 
-clientImage:
+client:
+  name: web_app
   repository: registry.hub.docker.com/agao2/web_app
   tag: 30
+  pullPolicy: IfNotPresent
+  containerPort: 3000
 
-serverImage:
+server:
+  name: core_server
   repository: registry.hub.docker.com/agao2/core_server
   tag: 30
+  pullPolicy: IfNotPresent
+  containerPort: 5000
 
-persistentVolume:
-  size: 2Gi
+nameOverride: ""
+fullnameOverride: ""
 
-service:
+clientService:
   type: ClusterIP
+  port: 3000
 
-
+serverService:
+  type: ClusterIP
+  port: 5000
 
 ingress:
   enabled: false

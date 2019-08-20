@@ -1,25 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: {{.Release.Name}}-client-deployment
+  labels:
+    app.kubernetes.io/name: {{ include "chathub.name" . }}
+    helm.sh/chart: {{ include "chathub.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "chathub.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+      component: {{ .Release.Name }}-client
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "chathub.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        component: {{ .Release.Name }}-client
     spec:
       containers:
-        - name: client-deployment
-          image: "{{.Values.clientImage.repository}}:{{ .Values.clientImage.tag }}"
+        - name: {{ .Values.client.name }}
+          image: "{{ .Values.client.repository }}:{{ .Values.client.tag }}"
+          imagePullPolicy: {{ .Values.client.pullPolicy }}
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: {{ .Values.client.containerPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -29,4 +37,17 @@ spec:
             httpGet:
               path: /
               port: http
-          
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
