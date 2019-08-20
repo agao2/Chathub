@@ -5,14 +5,14 @@
 replicaCount: 1
 
 client:
-  name: web_app
+  name: webapp
   repository: registry.hub.docker.com/agao2/web_app
   tag: 30
   pullPolicy: IfNotPresent
   containerPort: 3000
 
 server:
-  name: core_server
+  name: coreserver
   repository: registry.hub.docker.com/agao2/core_server
   tag: 30
   pullPolicy: IfNotPresent
