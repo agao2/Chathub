@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations: 
+    kubenernetes.io/ingress.class: nginx  
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+    nginx.ingress.kubernetes.io/session-cookie-name: REALTIMESERVERID
+    nginx.org/websocket-services: "server-cluster-ip-service"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: / 
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 3000
+          - path: /api
+            backend: 
+              serviceName: server-cluster-ip-service
+              servicePort: 5000
+          - path: /chathub
+            backend: 
+              serviceName: server-cluster-ip-service
+              servicePort: 5000
