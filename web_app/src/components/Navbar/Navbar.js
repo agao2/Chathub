@@ -5,9 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
-import './Navibar.css'
-
-class Navibar extends Component {
+class Navbar extends Component {
     onLogin = () => {
         this.props.history.push("/login");
     }
@@ -35,4 +33,4 @@ class Navibar extends Component {
 }
 
 
-export default Navibar;
+export default Navbar;

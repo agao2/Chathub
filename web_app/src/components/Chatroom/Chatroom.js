@@ -13,16 +13,7 @@ class Chatroom extends Component {
         // this.room = new URLSearchParams(props.location.search).get("room"); 
         this.room = props.room;
         this.state = {
-            messages: [
-                {
-                    text: "This is a test message!",
-                    member: {
-                        id: 1,
-                        color: "blue",
-                        username: "Fake User"
-                    }
-                }
-            ],
+            messages: [],
             member: {
                 id: 2,
                 username: "Computer",

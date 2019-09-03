@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 import { createChatroom, getChatrooms } from '../../actions/ChatroomActions'
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-// import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import Chatroom from '../Chatroom'
+import Chatroom from '../Chatroom';
 
 class Chathub extends Component {
 
@@ -37,7 +36,7 @@ class Chathub extends Component {
           <div style={{
             width: 240,
             flexShrink: 0,
-            height:64
+            height: 64
           }} />
           <List>
             {['Thread1', 'Thread2', 'Thread3', 'Thread4'].map((text, index) => (
@@ -47,23 +46,17 @@ class Chathub extends Component {
               </ListItem>
             ))}
           </List>
-          <Divider />
-          <List>
-            {['Direct1', 'Direct2', 'Direct3'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+          {/* <Divider />*/}
         </Drawer>
         <main style={{
-          padding: 10
+          padding: 10,
+          width: '100%'
         }}>
-           <div style={{
-            height:64
+          <div style={{
+            height: 64
           }} />
-         <Chatroom room="general" {...this.props} ></Chatroom>
+          {/* TODO: IF USER IS NOT LOGGED IN, SHOW A DIFFERENT SCREEN */}
+          <Chatroom room="general" {...this.props} ></Chatroom>
         </main>
       </div>
     );
