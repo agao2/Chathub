@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import RoomIcon from '@material-ui/icons/Room';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import Chatroom from '../Chatroom';
 import Typography from '@material-ui/core/Typography';
 // import _ from 'lodash'
@@ -50,7 +50,7 @@ class Chathub extends Component {
           <List>
             {this.props.Chatrooms.data.map((room, index) => (
               <ListItem button key={room.name}>
-                <RoomIcon />
+                <MeetingRoomIcon />
                 <ListItemText primary={room.name} />
               </ListItem>
             ))}
