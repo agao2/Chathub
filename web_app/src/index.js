@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import thunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 
 let initialState = {};
 if(localStorage.reduxStore)
@@ -22,7 +22,7 @@ const store = createStore(
     initialState,
     compose(
         applyMiddleware(thunk),
-        applyMiddleware(logger)
+        // applyMiddleware(logger)
     )
 )
 

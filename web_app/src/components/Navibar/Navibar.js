@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import Navbar from 'react-bootstrap/Navbar'
-import Button from 'react-bootstrap/Button'
-// import Nav from 'react-bootstrap/Nav'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+
 import './Navibar.css'
 
-
 class Navibar extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-
     onLogin = () => {
         this.props.history.push("/login");
     }
@@ -17,21 +15,21 @@ class Navibar extends Component {
     render() {
         const isLoggedIn = this.props.User ? this.props.User.username : null
         return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand >Chathub</Navbar.Brand>
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    {/* <Nav className="mr-auto">
-                        <Nav.Link href="#features">Features</Nav.Link>
-                    </Nav> */}
-                </Navbar.Collapse>
+            <div>
+            <AppBar style={{zIndex:1201}} >
+              <Toolbar>
+                <IconButton edge="start" color="inherit" aria-label="menu">
+                </IconButton>
+                <Typography variant="h6" style={{flexGrow:1}}>
+                  Chathub
+                </Typography>
                 {isLoggedIn
-                    ? <Navbar.Text>
-                        Signed in as: <a href="\">{this.props.User.username}</a>
-                    </Navbar.Text>
-                    : <Button onClick={this.onLogin}> Login </Button>
+                  ? <Typography variant="h6">{this.props.User.username}</Typography>
+                  : <Button color="inherit" onClick={this.onLogin} >Login</Button>
                 }
-                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            </Navbar>
+              </Toolbar>
+            </AppBar>
+          </div>
         );
     }
 }

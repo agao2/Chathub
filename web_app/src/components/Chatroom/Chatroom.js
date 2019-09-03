@@ -10,7 +10,8 @@ class Chatroom extends Component {
 
     constructor(props) {
         super(props);
-        this.room = new URLSearchParams(props.location.search).get("room"); 
+        // this.room = new URLSearchParams(props.location.search).get("room"); 
+        this.room = props.room;
         this.state = {
             messages: [
                 {
