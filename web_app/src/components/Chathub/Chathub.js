@@ -16,11 +16,21 @@ class Chathub extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      currentRoom: "General"
+    }
   }
 
   componentDidMount() {
     // fetch all the chatrooms that a user is a member of, also fetch any generic chatrooms like "general"
     this.props.getChatrooms();
+  }
+
+  onSideBarClick = (room) => {
+    console.log(room);
+    this.setState({
+      currentRoom: room
+    })
   }
 
   render = () => {
@@ -42,14 +52,14 @@ class Chathub extends Component {
             width: 240,
             flexShrink: 0,
             height: 64
-          }} /> 
-          <ListItem> 
+          }} />
+          <ListItem>
             <Typography variant="subtitle2"> Channels </Typography>
           </ListItem>
           <Divider />
           <List>
             {this.props.Chatrooms.data.map((room, index) => (
-              <ListItem button key={room.name}>
+              <ListItem button key={room.name} onClick={() => this.onSideBarClick(room.name)}>
                 <MeetingRoomIcon />
                 <ListItemText primary={room.name} />
               </ListItem>
@@ -69,7 +79,7 @@ class Chathub extends Component {
             height: 64
           }} />
           {/* TODO: IF USER IS NOT LOGGED IN, SHOW A DIFFERENT SCREEN */}
-          <Chatroom room="general" {...this.props} ></Chatroom>
+          <Chatroom key={this.state.currentRoom}  room={this.state.currentRoom} {...this.props} ></Chatroom>
         </main>
       </div>
     );
