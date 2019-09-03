@@ -10,7 +10,6 @@ class Chatroom extends Component {
 
     constructor(props) {
         super(props);
-        // this.room = new URLSearchParams(props.location.search).get("room"); 
         this.room = props.room;
         this.state = {
             messages: [],
@@ -34,27 +33,26 @@ class Chatroom extends Component {
 
         try {
             await this.state.hubConnection.start();
-            console.log('Connection started');
+
+            this.state.hubConnection.invoke("addToGroup", this.props.User.username, this.room || "default")
+
+            this.state.hubConnection.on('receivemessage', (user, message) => {
+                const messages = this.state.messages
+                let member = {
+                    id: 2,
+                    username: user,
+                    color: "Yellow"
+                }
+                messages.push({
+                    text: message,
+                    member: member
+                })
+                this.setState({ messages: messages })
+            });
         }
         catch (err) {
-            console.log('Error making connection');
+            // console.log(`Error making a connect: ${err}`);
         }
-
-        this.state.hubConnection.on('receivemessage', (user, message) => {
-            const messages = this.state.messages
-            let member = {
-                id: 2,
-                username: user,
-                color: "Yellow"
-            }
-            messages.push({
-                text: message,
-                member: member
-            })
-            this.setState({ messages: messages })
-        });
-
-        this.state.hubConnection.invoke("addToGroup", this.props.User.username, this.room || "default")
     }
 
     onSendMessage = (message) => {
@@ -72,7 +70,6 @@ class Chatroom extends Component {
                     onSendMessage={this.onSendMessage}
                 />
             </div>
-
         );
     }
 }

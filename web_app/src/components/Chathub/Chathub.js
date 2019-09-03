@@ -4,12 +4,13 @@ import { createChatroom, getChatrooms } from '../../actions/ChatroomActions'
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import RoomIcon from '@material-ui/icons/Room';
 import Chatroom from '../Chatroom';
+import Typography from '@material-ui/core/Typography';
+// import _ from 'lodash'
 
 class Chathub extends Component {
 
@@ -23,7 +24,11 @@ class Chathub extends Component {
   }
 
   render = () => {
-    console.log(this.props);
+    if (this.props.Chatrooms.loading) {
+      // return a loader of sorts
+      return <div></div>
+    }
+
     return (
       <div style={{ display: 'flex' }}>
         <Drawer
@@ -37,16 +42,24 @@ class Chathub extends Component {
             width: 240,
             flexShrink: 0,
             height: 64
-          }} />
+          }} /> 
+          <ListItem> 
+            <Typography variant="subtitle2"> Channels </Typography>
+          </ListItem>
+          <Divider />
           <List>
-            {['Thread1', 'Thread2', 'Thread3', 'Thread4'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+            {this.props.Chatrooms.data.map((room, index) => (
+              <ListItem button key={room.name}>
+                <RoomIcon />
+                <ListItemText primary={room.name} />
               </ListItem>
             ))}
+            <ListItem button key={"createRoom"}>
+              <AddIcon />
+              <ListItemText primary={"Create channel"} />
+            </ListItem>
           </List>
-          {/* <Divider />*/}
+          <Divider />
         </Drawer>
         <main style={{
           padding: 10,
