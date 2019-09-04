@@ -56,7 +56,7 @@ class Chathub extends Component {
     }
 
     return (
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex' , height:'100%' }}>
         <Drawer
           style={{
             width: 240,

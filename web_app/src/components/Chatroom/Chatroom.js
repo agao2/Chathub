@@ -50,7 +50,7 @@ class Chatroom extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ height: '100%' }}>
                 <Messages
                     messages={this.state.messages}
                     currentMember={this.state.member}

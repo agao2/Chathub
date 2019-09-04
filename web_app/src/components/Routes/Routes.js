@@ -10,7 +10,7 @@ class Routes extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{height:'100%'}}>
                 <Navbar {...this.props} ></Navbar>
                 <Switch>
                     {/* <Route path="/chatroom" component={(routeProps) => <Chatroom {...this.props} {...routeProps} />} /> */}

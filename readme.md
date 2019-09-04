@@ -1,4 +1,10 @@
 
+##TODO
+1. In react app, pull the state of messages for each chatroom into redux.
+2. Sign up for account creationg
+3. Google sign in with OAuth
+4. Redisgn the message in the chatroom (css wise) so that it looks better. I.E. input box at the bottom and have message go up. 
+Should use inline css javascript objects
 ## How to start locally
 The application is built using react, .net core, redis, and postgres. To start the application locally for development you will need start each of these 4 core parts. 
 
