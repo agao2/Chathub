@@ -3,8 +3,6 @@ import Messages from '../Messages'
 import Input from '../Input'
 import './Chatroom.css'
 import { HubConnectionBuilder } from '@aspnet/signalr'
-import { addConnection, deleteConnection } from '../../actions/HubConnectionsActions'
-import { connect } from 'react-redux'
 
 class Chatroom extends Component {
 
@@ -13,11 +11,7 @@ class Chatroom extends Component {
         this.room = props.room;
         this.state = {
             messages: [],
-            member: {
-                id: 2,
-                username: "Computer",
-                color: "Green"
-            }
+            member: {}
         }
     }
 
@@ -25,9 +19,6 @@ class Chatroom extends Component {
         const hubConnection = await new HubConnectionBuilder()
             .withUrl('/chathub')
             .build();
-
-        this.props.addConnection(hubConnection)
-
 
         this.setState({ hubConnection: hubConnection });
 
@@ -74,20 +65,7 @@ class Chatroom extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addConnection: hubConnection => dispatch(addConnection(hubConnection)),
-        deleteConnection: hubConnection => dispatch(deleteConnection(hubConnection))
-    };
-}
-
-function mapStateToProps(state) {
-    return {
-        HubConnections: state.HubConnections
-    }
-}
 
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Chatroom);
+export default Chatroom;
 
