@@ -2,9 +2,9 @@
 
 ## TODO 
 ```
-1. Add react router and separate the chatbox and login page into its own different url
-2. Have the login redirect you chat home page 
-3. Add neccessary user information to the navbar
+1.
+2. 
+3. 
 ```
 
 

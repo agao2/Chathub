@@ -32,7 +32,8 @@ You can also run utilizing docker with the command:
  
 ### How to run tests:
 - `npm test` to run unit test in watch mode. Note that console outputs are configured to show in the terminal.
-- `npm test -- --coverage` to see the code coverage of the react unit tests 
+- `npm test -- --coverage` to see the code coverage of the react unit tests. This will also generate a coverage folder that contains a page
+displaying the results of the unit tests. You can just open the index.html.
 
 .net core unit test comming soon
 

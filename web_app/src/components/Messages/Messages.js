@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 
 class Messages extends Component {
-
-    // constructor(props) {
-    //     super(props);
-    // }
-
+    
     renderMessage(message,index) {
         const { member, text } = message;
         const { currentMember } = this.props;
