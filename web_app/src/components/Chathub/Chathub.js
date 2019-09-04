@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import Chatroom from '../Chatroom';
 import Typography from '@material-ui/core/Typography';
+import { HubConnectionBuilder } from '@aspnet/signalr'
 // import _ from 'lodash'
 
 class Chathub extends Component {
@@ -17,17 +18,32 @@ class Chathub extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentRoom: "General"
+      currentRoom: "General",
+      connectionStarted: false
     }
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     // fetch all the chatrooms that a user is a member of, also fetch any generic chatrooms like "general"
     this.props.getChatrooms();
+
+
+    this.setState({ connectionStarted: false });
+    const hubConnection = await new HubConnectionBuilder()
+      .withUrl('/chathub')
+      .build();
+
+    this.setState({ hubConnection: hubConnection });
+    try {
+      await this.state.hubConnection.start();
+      this.setState({ connectionStarted: true });
+    }
+    catch (err) {
+      console.log(`Error making a connect: ${err}`);
+    }
   }
 
   onSideBarClick = (room) => {
-    console.log(room);
     this.setState({
       currentRoom: room
     })
@@ -78,8 +94,9 @@ class Chathub extends Component {
           <div style={{
             height: 64
           }} />
-          {/* TODO: IF USER IS NOT LOGGED IN, SHOW A DIFFERENT SCREEN */}
-          <Chatroom key={this.state.currentRoom}  room={this.state.currentRoom} {...this.props} ></Chatroom>
+          {this.state.connectionStarted ?
+            <Chatroom key={this.state.currentRoom} room={this.state.currentRoom} {...this.props} hubConnection={this.state.hubConnection}></Chatroom> : ""
+          }
         </main>
       </div>
     );
