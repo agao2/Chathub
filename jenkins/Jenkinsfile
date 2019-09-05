@@ -12,6 +12,17 @@ pipeline {
                 git branch: "master", url: 'https://github.com/agao2/Downvoot.git'
             }
         }
+        stage('React Unit Test') {
+            steps{
+                echo "running unit tests"
+                sh  """
+                    cd web_app
+                    npm install 
+                    export CI=true
+                    npm test
+                    """
+            }
+        }
         stage('Build images')
         {
             steps
