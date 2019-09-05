@@ -28,3 +28,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
     chmod +x ./kubectl && \
     mv ./kubectl /usr/local/bin/kubectl && \
     curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+
+# Install Node && NPM
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
+    apt-get -y install nodejs 
