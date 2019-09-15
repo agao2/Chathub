@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Messages from '../Messages'
 import Input from '../Input'
 import './Chatroom.css'
-import { HubConnectionBuilder } from '@aspnet/signalr'
 
 class Chatroom extends Component {
 
@@ -32,7 +31,7 @@ class Chatroom extends Component {
     componentDidMount = async () => {
         try {
             this.props.hubConnection.invoke("addToGroup", this.props.User.username, this.room || "default")
-            this.props.hubConnection.on('receivemessage', this.recieveMessage);
+            this.props.hubConnection.on(`receivemessage:${this.room}`, this.recieveMessage);
         }
         catch (err) {
             console.log(`Error adding user to a room: ${err}`);

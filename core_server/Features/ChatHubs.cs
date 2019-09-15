@@ -24,21 +24,21 @@ namespace core_server.Features
         public async Task SendMessageToGroup(string groupName, string user, string message)
         {
             _logger.LogCritical($"In group: {groupName} and sending message: {message}");
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", $"{user}: {message}");
+            await Clients.Group(groupName).SendAsync($"ReceiveMessage:{groupName}", $"{user}: {message}");
         }
 
         public async Task AddToGroup(string user, string groupName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             _logger.LogCritical($"In group: {groupName} with connection Id: {Context.ConnectionId}");
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", $"{user} has joined the group {groupName}.");
+            await Clients.Group(groupName).SendAsync($"ReceiveMessage:{groupName}", $"{user} has joined the group {groupName}.");
         }
 
         public async Task RemoveFromGroup(string user, string groupName)
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
             _logger.LogCritical($"In group: {groupName} with connection Id: {Context.ConnectionId}");
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", $"{user} has left the group {groupName}.");
+            await Clients.Group(groupName).SendAsync($"ReceiveMessage:{groupName}", $"{user} has left the group {groupName}.");
         }
 
 
