@@ -19,6 +19,8 @@ test('onSubmit is called when login button is clicked ', () => {
         authenticate: jest.fn()
     }
     const {container} = render(<Login {...mockProps} />);
+    container.querySelector("#emailAddress").value = "test"
+    container.querySelector("#password").value = "password"
     fireEvent.click(container.querySelector("#submit"));
     expect(mockProps.authenticate).toHaveBeenCalled();
 })
@@ -30,6 +32,8 @@ test('sucessfully logged in user redirects' , async () => {
         history: {push : jest.fn()}
     }
     const {container} = render(<Login {...mockProps} />);
+    container.querySelector("#emailAddress").value = "test"
+    container.querySelector("#password").value = "password"
     fireEvent.click(container.querySelector("#submit"));
     await expect(mockProps.authenticate).toHaveReturned();
     expect(mockProps.history.push).toHaveBeenCalled();
@@ -42,6 +46,8 @@ test('no user does not redirect' , async () => {
         history: {push : jest.fn()}
     }
     const {container} = render(<Login {...mockProps} />);
+    container.querySelector("#emailAddress").value = "test"
+    container.querySelector("#password").value = "password"
     fireEvent.click(container.querySelector("#submit"));
     await expect(mockProps.authenticate).toHaveReturned();
     expect(mockProps.history.push).not.toHaveBeenCalled();
