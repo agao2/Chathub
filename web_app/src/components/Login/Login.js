@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
+import { withStyles } from '@material-ui/core/styles';
 
 class Login extends Component {
 
@@ -28,29 +28,21 @@ class Login extends Component {
   onSubmit = async (event) => {
     // this triggers form validation
     if (event.currentTarget.form.reportValidity()) {
-  
+
     }
   }
 
   render() {
     return (
       <Container component="main" maxWidth="xs">
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginTop: '20%',
-        }}>
-          <Avatar>
+        <div className={this.props.classes.paper} >
+          <Avatar className={this.props.classes.avatar} >
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
         </Typography>
-          <form style={{
-            width: '100%', // Fix IE 11 issue.
-            display: 'block'
-          }}>
+          <form className={this.props.classes.form} >
             <TextField
               variant="outlined"
               margin="normal"
@@ -85,7 +77,6 @@ class Login extends Component {
               variant="contained"
               color="primary"
               onClick={this.onSubmit}
-              style={{ margin: '2% 0 2% 0 ' }}
             >
               Sign In
           </Button>
@@ -108,4 +99,25 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const styles = theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    display: 'block',
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
+
+export default withStyles(styles)(Login);

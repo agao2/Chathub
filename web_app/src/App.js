@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux'
 import { getUser, authenticate } from './actions/UsersActions'
@@ -38,5 +37,4 @@ function mapStateToProps(state) {
   }
 }
 
-// export default App;
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
