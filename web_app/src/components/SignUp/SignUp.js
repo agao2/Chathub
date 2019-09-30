@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { withStyles } from '@material-ui/core/styles';
 
 
 class SignUp extends Component {
@@ -41,23 +40,14 @@ class SignUp extends Component {
     render() {
         return (
             <Container component="main" maxWidth="xs">
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    marginTop: '20%',
-                }}>
-                    <Avatar >
+                <div className={this.props.classes.paper}>
+                    <Avatar className={this.props.classes.avatar} >
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign up
             </Typography>
-                    <form style={{
-                        width: '100%', // Fix IE 11 issue.
-                        display: 'block',
-                        margin: '5% 0 5% 0 '
-                    }} noValidate>
+                    <form className={this.props.classes.form} noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
@@ -99,7 +89,7 @@ class SignUp extends Component {
                             variant="contained"
                             color="primary"
                             onClick={this.onSubmit}
-                            style={{ margin: '2% 0 2% 0 ' }}
+                            className={this.props.classes.submit}
                         >
                             Sign Up
               </Button>
@@ -117,4 +107,25 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+const styles = theme => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+        display: 'block',
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+});
+
+export default withStyles(styles)(SignUp);
