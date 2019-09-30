@@ -51,7 +51,7 @@ class Chathub extends Component {
   }
 
   render = () => {
-    if (this.props.Chatrooms.loading) {
+    if (!this.props.Chatrooms || this.props.Chatrooms.loading) {
       // return a loader of sorts
       return <div></div>
     }
