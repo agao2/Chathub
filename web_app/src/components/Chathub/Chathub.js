@@ -11,6 +11,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import Chatroom from '../Chatroom';
 import Typography from '@material-ui/core/Typography';
 import { HubConnectionBuilder } from '@aspnet/signalr'
+import { withStyles } from '@material-ui/core/styles';
 // import _ from 'lodash'
 
 class Chathub extends Component {
@@ -56,19 +57,15 @@ class Chathub extends Component {
     }
 
     return (
-      <div style={{ display: 'flex' , height:'100%' }}>
+      <div className={this.props.classes.root}>
         <Drawer
-          style={{
-            width: 240,
-            flexShrink: 0
-          }}
+          className={this.props.classes.drawer}
           variant="permanent"
+          classes={{
+            paper: this.props.classes.drawerPaper,
+          }}
         >
-          <div style={{
-            width: 240,
-            flexShrink: 0,
-            height: 64
-          }} />
+          <div className={this.props.classes.toolbar} />
           <ListItem>
             <Typography variant="subtitle2"> Channels </Typography>
           </ListItem>
@@ -87,13 +84,8 @@ class Chathub extends Component {
           </List>
           <Divider />
         </Drawer>
-        <main style={{
-          padding: 10,
-          width: '100%'
-        }}>
-          <div style={{
-            height: 64
-          }} />
+        <main className={this.props.classes.content} >
+          <div className={this.props.classes.toolbar} />
           {this.state.connectionStarted ?
             <Chatroom key={this.state.currentRoom} room={this.state.currentRoom} {...this.props} hubConnection={this.state.hubConnection}></Chatroom> : ""
           }
@@ -118,4 +110,29 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chathub);
+const drawerWidth = 240;
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+  },
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Chathub));
