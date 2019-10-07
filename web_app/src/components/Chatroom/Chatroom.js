@@ -49,7 +49,13 @@ class Chatroom extends Component {
 
     render() {
         return (
-            <div style={{ height: '100%' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    height: '100%'
+                }}>
                 <Messages
                     messages={this.state.messages}
                     currentMember={this.state.member}

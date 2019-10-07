@@ -55,7 +55,6 @@ class Chathub extends Component {
       // return a loader of sorts
       return <div></div>
     }
-
     return (
       <div className={this.props.classes.root}>
         <Drawer
@@ -85,7 +84,6 @@ class Chathub extends Component {
           <Divider />
         </Drawer>
         <main className={this.props.classes.content} >
-          <div className={this.props.classes.toolbar} />
           {this.state.connectionStarted ?
             <Chatroom key={this.state.currentRoom} room={this.state.currentRoom} {...this.props} hubConnection={this.state.hubConnection}></Chatroom> : ""
           }
@@ -114,6 +112,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: 'flex',
+      height: '100%',
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -131,8 +130,9 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
-  },
-});
+    marginTop: theme.spacing(5),
+    },
+  });
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Chathub));

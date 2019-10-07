@@ -27,7 +27,9 @@ class Messages extends Component {
     render() {
         const { messages } = this.props;
         return (
-            <ul className="Message-list">
+            <ul style={{
+                overflowY:'scroll'
+            }}>
                 {messages.map( (m,index) => this.renderMessage(m,index))}
             </ul>
         )
