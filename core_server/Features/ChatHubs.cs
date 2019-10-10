@@ -17,14 +17,14 @@ namespace core_server.Features
         // broadCast to all connections in all groups , all users
         public async Task SendMessage(string user, string message)
         {
-             _logger.LogCritical($"Sending message: {message}");
+            _logger.LogCritical($"Sending message: {message}");
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
         public async Task SendMessageToGroup(string groupName, string user, string message)
         {
             _logger.LogCritical($"In group: {groupName} and sending message: {message}");
-            await Clients.Group(groupName).SendAsync($"ReceiveMessage:{groupName}", $"{user}: {message}");
+            await Clients.Group(groupName).SendAsync($"ReceiveMessage:{groupName}", user, message);
         }
 
         public async Task AddToGroup(string user, string groupName)
