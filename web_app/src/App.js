@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import { getUser, authenticate } from './actions/UsersActions'
+import { getUser, authenticate } from './redux/user/UsersActions'
 import Routes from './components/Routes'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import Login from './components/Login'

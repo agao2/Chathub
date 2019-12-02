@@ -1,6 +1,5 @@
 
-import { actions } from '../actions/ChatroomActions'
-import { object } from 'prop-types';
+import { actions } from './ChatroomActions'
 const defaultState = {
     data: [],
     loading: false

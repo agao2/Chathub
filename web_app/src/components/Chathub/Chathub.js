@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { createChatroom, getChatrooms } from '../../actions/ChatroomActions'
+import { createChatroom, getChatrooms } from '../../redux/chatroom/ChatroomActions'
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';

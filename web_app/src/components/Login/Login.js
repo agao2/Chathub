@@ -28,7 +28,7 @@ class Login extends Component {
   onSubmit = async (event) => {
     // this triggers form validation
     if (event.currentTarget.form.reportValidity()) {
-
+      
     }
   }
 
