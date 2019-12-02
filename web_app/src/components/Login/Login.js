@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,7 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
-
+import { authenticate } from '../../redux/user/UsersActions'
 class Login extends Component {
 
   constructor(props) {
@@ -28,7 +29,9 @@ class Login extends Component {
   onSubmit = async (event) => {
     // this triggers form validation
     if (event.currentTarget.form.reportValidity()) {
-      
+      let result = await this.props.authenticate(this.state)
+      if (result.type === "LOGIN")
+        this.props.history.push('/')
     }
   }
 
@@ -99,6 +102,18 @@ class Login extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authenticate: (user) => dispatch(authenticate(user)),
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    Chatrooms: state.User
+  }
+}
+
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -120,4 +135,4 @@ const styles = theme => ({
   },
 });
 
-export default withStyles(styles)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));
