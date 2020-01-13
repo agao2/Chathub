@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: agao2/web_app:1
+        image: agao2/web_app:latest
         resources:
           limits:
             memory: "128Mi"

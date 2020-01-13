@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: agao2/core_server:1
+        image: agao2/core_server:latest
         resources:
           limits:
             memory: "128Mi"
